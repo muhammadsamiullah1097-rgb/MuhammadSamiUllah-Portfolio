@@ -310,6 +310,155 @@ footer p{margin:0}
   .reveal{opacity:1;transform:none;transition:none}
   .dist-fill{transition:none}
   .spinner{animation:none}
+  .button::after{display:none}
+  .proj-card:hover,.tool-card:hover,.hobby:hover{transform:none}
+  .modal.open .modal-box{animation:none}
+  .flash{animation:none}
+  .nav-links a::after{transition:none}
+  .proj-card:hover .proj-cover svg{transform:none}
+}
+/* ================= ENRICHMENT PACK ================= */
+.anchor{display:block;position:relative;top:-96px}
+/* ---------- button system ---------- */
+.button{position:relative;overflow:hidden}
+.button::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-20deg);transition:left .55s ease;pointer-events:none}
+.button:hover::after{left:135%}
+.button:active{transform:scale(.96)}
+.button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.button:disabled::after{display:none}
+.button-ghost{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;padding:.95rem 1.05rem;background:transparent;color:var(--text);border:1px solid rgba(232,246,244,.35);font-size:.67rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s,background .2s}
+.button-ghost:hover{transform:translateY(-2px);border-color:var(--acid);box-shadow:0 0 0 1px var(--acid)}
+.button-ghost:active{transform:scale(.96)}
+.button-ghost b{font-size:1rem;font-weight:800;color:var(--acid)}
+.button-ghost:disabled{opacity:.45;cursor:not-allowed;transform:none}
+/* ---------- nav micro-interaction ---------- */
+.nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--acid)}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--acid);transition:right .25s ease}
+.nav-links a:hover::after,.nav-links a.active::after{right:0}
+/* ---------- grain ---------- */
+body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* ---------- marquee ---------- */
+.identity-strip:hover div{animation-play-state:paused}
+/* ---------- section divider ---------- */
+.sec-div{display:flex;align-items:center;gap:1rem;margin:0 0 3rem;color:var(--muted);font:500 .6rem var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.sec-div::before,.sec-div::after{content:"";height:1px;background:var(--line);flex:1}
+.sec-div span{color:var(--acid)}
+/* ---------- project card grid ---------- */
+.proj-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem}
+.proj-card{display:flex;flex-direction:column;text-align:left;background:linear-gradient(150deg,#132027,#0d141a 70%);border:1px solid var(--line);padding:0;cursor:pointer;min-height:350px;font:inherit;color:inherit;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease,opacity .25s ease}
+.proj-card:hover{transform:translateY(-6px);border-color:var(--acid);box-shadow:0 24px 50px -24px rgba(184,255,72,.35)}
+.proj-card:active{transform:scale(.98)}
+.proj-card:focus-visible{outline:2px solid var(--acid);outline-offset:3px}
+.proj-card.dim{opacity:.3;filter:saturate(.4)}
+.proj-card.lit{border-color:var(--acid);box-shadow:0 0 0 1px var(--acid),0 18px 60px -20px rgba(184,255,72,.28)}
+.proj-cover{display:block;height:128px;border-bottom:1px solid var(--line);background:radial-gradient(circle at 70% 20%,rgba(120,221,255,.12),transparent 55%),radial-gradient(circle at 20% 80%,rgba(184,255,72,.1),transparent 50%),#0c1418;position:relative;overflow:hidden;flex:none}
+.proj-cover svg{position:absolute;inset:0;margin:auto;transition:transform .3s ease}
+.proj-card:hover .proj-cover svg{transform:scale(1.12) rotate(-2deg)}
+.proj-card-body{display:flex;flex-direction:column;gap:.55rem;padding:1.2rem;flex:1}
+.proj-card-type{color:var(--acid);font:500 .55rem var(--mono);text-transform:uppercase;letter-spacing:.08em}
+.proj-title{font-size:1.12rem;font-weight:800;letter-spacing:-.03em;line-height:1.18}
+.proj-desc{color:var(--muted);font-size:.79rem;line-height:1.55;flex:1}
+.proj-tags{display:flex;gap:.4rem;flex-wrap:wrap}
+.proj-tags i{font:500 .56rem var(--mono);font-style:normal;color:var(--acid);border:1px solid rgba(184,255,72,.3);padding:.28rem .55rem;letter-spacing:.04em}
+.proj-open{display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.2rem;border-top:1px solid var(--line);font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+.proj-card:hover .proj-open{color:var(--acid)}
+.proj-open b{color:var(--acid);font-size:.9rem}
+.grid-hint{margin:1.3rem 0 0;color:var(--muted);font:400 .68rem var(--mono);letter-spacing:.04em}
+/* ---------- modal ---------- */
+.modal{display:none;position:fixed;inset:0;z-index:180}
+.modal.open{display:block}
+.modal-overlay{position:absolute;inset:0;background:rgba(4,8,10,.8);backdrop-filter:blur(6px)}
+.modal-box{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(700px,calc(100vw - 2.5rem));max-height:calc(100vh - 4rem);overflow:auto;background:var(--surface);border:1px solid rgba(184,255,72,.35);box-shadow:0 40px 120px -20px rgba(0,0,0,.85);padding:clamp(1.5rem,4vw,2.6rem)}
+.modal.open .modal-box{animation:pop .28s ease}
+@keyframes pop{from{transform:translate(-50%,-48%) scale(.98);opacity:0}}
+.modal-wide{width:min(900px,calc(100vw - 2.5rem))}
+.modal-x{position:absolute;top:.9rem;right:.9rem;background:var(--ink);border:1px solid var(--line);color:var(--muted);width:42px;height:42px;cursor:pointer;font-size:1rem;z-index:2}
+.modal-x:hover{color:var(--acid);border-color:var(--acid)}
+.pm-type{margin:0 0 .5rem;color:var(--acid);font:500 .58rem var(--mono);text-transform:uppercase;letter-spacing:.08em}
+.pm-title{font-size:clamp(1.8rem,3.4vw,2.6rem);margin:0 0 1rem;letter-spacing:-.05em;line-height:1}
+.pm-desc{color:var(--muted);font-size:.9rem;line-height:1.7;max-width:560px}
+.pm-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.6rem 0}
+.pm-cols h4{margin:0 0 .8rem;font:500 .58rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text)}
+.pm-tools{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.45rem}
+.pm-tools li{font:500 .62rem var(--mono);color:var(--acid);border:1px solid rgba(184,255,72,.3);padding:.35rem .65rem}
+.pm-feats{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.55rem}
+.pm-feats li{color:#bdccca;font-size:.8rem;line-height:1.55;padding-left:1.1rem;position:relative}
+.pm-feats li::before{content:"→";position:absolute;left:0;color:var(--acid)}
+.pm-links{display:flex;gap:1.4rem;flex-wrap:wrap;margin:0 0 1.2rem}
+.pm-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.6rem;padding-top:1.6rem;border-top:1px solid var(--line)}
+/* ---------- tools grid ---------- */
+.tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.6rem}
+.tool-card{background:var(--surface);border:1px solid var(--line);padding:1.4rem;cursor:pointer;text-align:left;font:inherit;color:inherit;display:flex;flex-direction:column;gap:.55rem;min-height:210px;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.tool-card:hover{transform:translateY(-5px);border-color:var(--acid);box-shadow:0 0 24px -6px rgba(184,255,72,.45),0 18px 40px -20px rgba(0,0,0,.7)}
+.tool-card:active{transform:scale(.98)}
+.tool-card[aria-pressed="true"]{border-color:var(--acid);box-shadow:0 0 0 1px var(--acid),0 0 28px -4px rgba(184,255,72,.5)}
+.tool-cat{font:500 .55rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.tool-name{font-size:1.2rem;font-weight:800;letter-spacing:-.03em}
+.tool-line{color:var(--muted);font-size:.79rem;line-height:1.55;flex:1}
+.tool-link{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--acid);display:flex;align-items:center;gap:.45rem}
+.tool-link b{font-size:.9rem}
+/* ---------- about enrichment ---------- */
+.about-figure{margin:0 0 1.6rem;border:1px solid var(--line);background:linear-gradient(145deg,#14282c,#0c1319);overflow:hidden}
+.about-figure img{width:100%;height:280px;object-fit:cover;object-position:top;filter:grayscale(1) contrast(1.05);display:block}
+.about-figure figcaption{display:flex;justify-content:space-between;padding:.8rem 1rem;color:var(--muted);font:500 .55rem var(--mono);letter-spacing:.08em;text-transform:uppercase;border-top:1px solid var(--line)}
+.about-figure figcaption span:last-child{color:var(--acid)}
+.facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.fact{border:1px solid var(--line);padding:.95rem 1rem;background:var(--surface)}
+.fact span{display:block;color:var(--acid);font:500 .52rem var(--mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+.fact strong{font-size:.78rem;line-height:1.5;font-weight:700}
+.hobbies{margin-top:2.2rem}
+.hobby-grid{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.1rem}
+.hobby{display:inline-flex;align-items:center;gap:.55rem;border:1px solid var(--line);padding:.6rem .95rem;font-size:.78rem;font-weight:700;background:var(--surface);transition:transform .2s,border-color .2s,box-shadow .2s}
+.hobby:hover{border-color:var(--acid);transform:translateY(-2px);box-shadow:0 8px 24px -12px rgba(184,255,72,.5)}
+.hobby svg{width:18px;height:18px;color:var(--acid);flex:none}
+.baloch-note{margin:1.7rem 0 0;border-left:2px solid var(--acid);padding:.2rem 0 .2rem 1.1rem;color:var(--muted);font-size:.86rem;line-height:1.7;max-width:560px}
+.baloch-note strong{color:var(--text)}
+/* ---------- resume ---------- */
+.resume-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.2rem}
+.cv-frame iframe{width:100%;height:min(70vh,620px);border:1px solid var(--line);background:#0a0f13;display:block}
+.cv-fallback{margin:1.1rem 0 0;color:var(--muted);font-size:.82rem}
+.cv-fallback a{color:var(--acid);font-weight:700;border-bottom:1px solid rgba(184,255,72,.4);padding-bottom:.15rem}
+/* ---------- contact ---------- */
+.contact-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4.5rem);margin-top:3rem;align-items:start}
+.cform{border:1px solid var(--line);background:var(--surface2);padding:clamp(1.4rem,3vw,2.2rem)}
+.field{position:relative;margin-bottom:1.5rem}
+.field input,.field textarea{width:100%;background:var(--surface);border:1px solid var(--line);padding:1.2rem 1rem .65rem;color:var(--text);font-size:.95rem;outline:0;transition:border-color .2s,box-shadow .2s;border-radius:0}
+.field textarea{resize:vertical;min-height:140px}
+.field label{position:absolute;left:1rem;top:1.05rem;color:var(--muted);font-size:.86rem;pointer-events:none;transition:all .18s ease}
+.field input:focus,.field textarea:focus{border-color:var(--acid);box-shadow:0 0 0 1px var(--acid)}
+.field input:focus+label,.field input:not(:placeholder-shown)+label,.field textarea:focus+label,.field textarea:not(:placeholder-shown)+label{top:.4rem;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--acid);font-family:var(--mono)}
+.f-err{display:none;color:#ff7a7a;font-size:.75rem;margin-top:.45rem}
+.f-err.show{display:block}
+.field.invalid input,.field.invalid textarea{border-color:#ff7a7a}
+.c-status{margin:1rem 0 0;font:500 .72rem var(--mono);color:var(--acid);min-height:1.5em;letter-spacing:.03em}
+.c-direct{display:flex;flex-direction:column;gap:1.1rem}
+.c-direct h3{font-size:1.4rem;letter-spacing:-.04em;margin:0 0 .2rem}
+.c-direct>p{color:var(--muted);font-size:.85rem;line-height:1.65;margin:0 0 .6rem;max-width:340px}
+.c-line{display:flex;align-items:center;justify-content:space-between;gap:1rem;border:1px solid var(--line);padding:1rem 1.2rem;background:var(--surface);transition:border-color .2s,transform .2s}
+.c-line:hover{border-color:var(--acid);transform:translateX(4px)}
+.c-line span{font:500 .58rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.c-line strong{font-size:.85rem;font-weight:700}
+.c-line b{color:var(--acid)}
+.c-row{display:flex;gap:.8rem;flex-wrap:wrap}
+/* ---------- scroll-target flash ---------- */
+.flash{animation:flash 1.6s ease}
+@keyframes flash{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 2px var(--acid)}}
+/* ---------- responsive additions ---------- */
+@media(max-width:1100px){
+  .proj-grid,.tools-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:900px){
+  .contact-grid{grid-template-columns:1fr}
+  .pm-cols{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .proj-grid,.tools-grid{grid-template-columns:1fr}
+  .proj-card{min-height:0}
+  .modal-box{padding:1.4rem}
+  .nav-links{overflow-x:auto;scrollbar-width:none;max-width:52vw}
+  .nav-links::-webkit-scrollbar{display:none}
+  .about-figure img{height:220px}
+  .sec-div{margin-bottom:2rem}
 }
 </style>
 </head>
@@ -319,12 +468,13 @@ footer p{margin:0}
 <header class="header">
   <a class="wordmark" href="#top">SAMI<span>_</span></a>
   <nav class="nav-links" aria-label="Main navigation">
-    <a href="#work" data-nav>Work</a>
+    <a href="#projects" data-nav>Projects</a>
     <a href="#demos" data-nav>Demos</a>
+    <a href="#tools" data-nav>Tools</a>
     <a href="#about" data-nav>About</a>
     <a href="#contact" data-nav>Contact</a>
   </nav>
-  <a class="button button-sm" id="resumeBtn" href="#" target="_blank" rel="noopener">Resume <b>↗</b></a>
+  <a class="button button-sm" id="resumeBtn" href="#" target="_blank" rel="noopener">Download CV <b>↓</b></a>
 </header>
 <main id="main">
 <!-- HERO -->
@@ -342,7 +492,7 @@ footer p{margin:0}
     <p class="hero-intro">Business data analyst working between analytics, AI and digital product design — this portfolio is a live demonstration, not a brochure.</p>
     <div class="hero-actions" id="heroActions">
       <a class="button" href="#demos">Explore the demos <b>↓</b></a>
-      <a class="link" id="heroFloodBtn" href="https://muhammadsamiullah1097-rgb.github.io/PakistanFloodPredictionTool/" target="_blank" rel="noopener">View live project <b>↗</b></a>
+      <a class="link" id="heroFloodBtn" href="https://muhammadsamiullah1097-rgb.github.io/PakistanFloodPredictionTool/" target="_blank" rel="noopener">View live demo <b>↗</b></a>
     </div>
     <div class="signal-panel" aria-label="Interactive demo: live data panel">
       <div class="signal-panel-head"><span>Live data / sample</span><span class="status"><i></i>Interactive</span></div>
@@ -364,14 +514,97 @@ footer p{margin:0}
 <!-- IDENTITY STRIP -->
 <div class="identity-strip" aria-hidden="true"><div><span>Python ·</span><span>SQL ·</span><span>Data Visualization ·</span><span>Tableau ·</span><span>Power BI ·</span><span>Excel ·</span><span>Statistical Analysis ·</span><span>Database Management ·</span><span>Python ·</span><span>SQL ·</span><span>Data Visualization ·</span><span>Tableau ·</span><span>Power BI ·</span><span>Excel ·</span><span>Statistical Analysis ·</span><span>Database Management ·</span><span>Python ·</span><span>SQL ·</span><span>Data Visualization ·</span><span>Tableau ·</span><span>Power BI ·</span><span>Excel ·</span><span>Statistical Analysis ·</span><span>Database Management ·</span><span>Python ·</span><span>SQL ·</span><span>Data Visualization ·</span><span>Tableau ·</span><span>Power BI ·</span><span>Excel ·</span><span>Statistical Analysis ·</span><span>Database Management ·</span></div></div>
 
-<!-- WORK -->
-<section class="work shell" id="work">
+<span id="work" class="anchor" aria-hidden="true"></span>
+<section class="work shell" id="projects">
   <div class="section-head reveal">
     <div>
-      <p class="eyebrow"><span></span>Selected work</p>
+      <p class="eyebrow"><span></span>Selected projects</p>
       <h2>Don't just read.<br><em>Interact.</em></h2>
     </div>
-    <p>Every project below is something you can try right here — the portfolio itself is the demonstration.</p>
+    <p>Every project below is something you can try right here — the portfolio itself is the demonstration. Open a card for the full story.</p>
+  </div>
+  <div class="proj-grid reveal" id="projGrid" role="list" aria-label="Project cards">
+    <button class="proj-card" role="listitem" data-proj="flood" aria-haspopup="dialog">
+      <span class="proj-cover" aria-hidden="true"><svg viewBox="0 0 120 80" width="76" height="50" fill="none" stroke="#b8ff48" stroke-width="2.5" stroke-linecap="round"><path d="M6 26c10-10 20-10 30 0s20 10 30 0 20-10 30 0"/><path d="M6 44c10-10 20-10 30 0s20 10 30 0 20-10 30 0" stroke="#78ddff"/><path d="M6 62c10-10 20-10 30 0s20 10 30 0 20-10 30 0" opacity=".45"/></svg></span>
+      <span class="proj-card-body">
+        <span class="proj-card-type">Decision-support tool · Live</span>
+        <span class="proj-title">Pakistan Flood Prediction System</span>
+        <span class="proj-desc">Explainable flood-risk assessments for 78 districts — live data, live dashboard.</span>
+        <span class="proj-tags"><i>Python</i><i>Open-Meteo</i><i>GloFAS</i></span>
+      </span>
+      <span class="proj-open">Open <b>→</b></span>
+    </button>
+    <button class="proj-card" role="listitem" data-proj="sales" aria-haspopup="dialog">
+      <span class="proj-cover" aria-hidden="true"><svg viewBox="0 0 120 80" width="76" height="50" fill="none" stroke="#b8ff48" stroke-width="2.5" stroke-linecap="round"><path d="M14 66V44M38 66V30M62 66V50M86 66V22" stroke="#78ddff"/><path d="M8 34l26-12 24 10 26-16 26-8"/><path d="M102 8h8v8"/></svg></span>
+      <span class="proj-card-body">
+        <span class="proj-card-type">Business intelligence · Demo</span>
+        <span class="proj-title">Sales Intelligence Lab</span>
+        <span class="proj-desc">Filterable BI dashboard — every KPI recomputed from one dataset.</span>
+        <span class="proj-tags"><i>JavaScript</i><i>SVG</i><i>BI filters</i></span>
+      </span>
+      <span class="proj-open">Open <b>→</b></span>
+    </button>
+    <button class="proj-card" role="listitem" data-proj="nlp" aria-haspopup="dialog">
+      <span class="proj-cover" aria-hidden="true"><svg viewBox="0 0 120 80" width="76" height="50" fill="none" stroke="#b8ff48" stroke-width="2.5" stroke-linecap="round"><rect x="18" y="12" width="84" height="46" rx="8"/><path d="M40 58l-6 12 16-12"/><path d="M32 30h56M32 40h36" stroke="#78ddff"/></svg></span>
+      <span class="proj-card-body">
+        <span class="proj-card-type">Natural language processing · Demo</span>
+        <span class="proj-title">NLP Sentiment Lab</span>
+        <span class="proj-desc">Paste text, get sentiment, confidence and keywords — in-browser.</span>
+        <span class="proj-tags"><i>JavaScript</i><i>Lexicon</i><i>Tokenizer</i></span>
+      </span>
+      <span class="proj-open">Open <b>→</b></span>
+    </button>
+    <button class="proj-card" role="listitem" data-proj="sql" aria-haspopup="dialog">
+      <span class="proj-cover" aria-hidden="true"><svg viewBox="0 0 120 80" width="76" height="50" fill="none" stroke="#b8ff48" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="10" width="92" height="60" rx="6"/><path d="M30 30l10 8-10 8M48 46h24" stroke="#78ddff"/></svg></span>
+      <span class="proj-card-body">
+        <span class="proj-card-type">SQL · Data exploration · Demo</span>
+        <span class="proj-title">SQL Explorer</span>
+        <span class="proj-desc">Preset queries, readable SQL, instant result sets.</span>
+        <span class="proj-tags"><i>SQL</i><i>Aggregation</i><i>Console</i></span>
+      </span>
+      <span class="proj-open">Open <b>→</b></span>
+    </button>
+    <button class="proj-card" role="listitem" data-proj="clean" aria-haspopup="dialog">
+      <span class="proj-cover" aria-hidden="true"><svg viewBox="0 0 120 80" width="76" height="50" fill="none" stroke="#b8ff48" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M60 8l4 14 14 4-14 4-4 14-4-14-14-4 14-4z"/><path d="M92 44l2.5 8 8 2.5-8 2.5-2.5 8-2.5-8-8-2.5 8-2.5z" stroke="#78ddff"/><path d="M28 48l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" opacity=".6"/></svg></span>
+      <span class="proj-card-body">
+        <span class="proj-card-type">Data quality · Demo</span>
+        <span class="proj-title">Data Cleaning Lab</span>
+        <span class="proj-desc">Dirty-to-clean transformation with a before/after toggle.</span>
+        <span class="proj-tags"><i>Data quality</i><i>Before/after</i><i>Audit</i></span>
+      </span>
+      <span class="proj-open">Open <b>→</b></span>
+    </button>
+    <button class="proj-card" role="listitem" data-proj="acad-data" aria-haspopup="dialog">
+      <span class="proj-cover" aria-hidden="true"><svg viewBox="0 0 120 80" width="76" height="50" fill="none" stroke="#b8ff48" stroke-width="2.5" stroke-linecap="round"><path d="M14 66h92" stroke="#78ddff"/><rect x="24" y="40" width="12" height="26"/><rect x="46" y="28" width="12" height="38"/><rect x="68" y="46" width="12" height="20"/><circle cx="98" cy="24" r="5"/></svg></span>
+      <span class="proj-card-body">
+        <span class="proj-card-type">Academic project · COMSATS</span>
+        <span class="proj-title">End-to-End Data Analysis</span>
+        <span class="proj-desc">Full analysis workflow in Python, Tableau and SQL — faculty recognized.</span>
+        <span class="proj-tags"><i>Python</i><i>Tableau</i><i>SQL</i></span>
+      </span>
+      <span class="proj-open">Open <b>→</b></span>
+    </button>
+    <button class="proj-card" role="listitem" data-proj="acad-db" aria-haspopup="dialog">
+      <span class="proj-cover" aria-hidden="true"><svg viewBox="0 0 120 80" width="76" height="50" fill="none" stroke="#b8ff48" stroke-width="2.5"><ellipse cx="60" cy="18" rx="30" ry="10"/><path d="M30 18v44c0 5.5 13.4 10 30 10s30-4.5 30-10V18"/><path d="M30 40c0 5.5 13.4 10 30 10s30-4.5 30-10" stroke="#78ddff"/></svg></span>
+      <span class="proj-card-body">
+        <span class="proj-card-type">Academic project · COMSATS</span>
+        <span class="proj-title">NGO Operations Database</span>
+        <span class="proj-desc">Normalized MySQL database with procedures, triggers and ER design.</span>
+        <span class="proj-tags"><i>MySQL</i><i>ER modeling</i><i>Procedures</i></span>
+      </span>
+      <span class="proj-open">Open <b>→</b></span>
+    </button>
+  </div>
+  <p class="grid-hint reveal">◈ Click any card for the full story — demos, tools and details. Live demos run below.</p>
+</section>
+<!-- DEMOS -->
+<section class="band shell" id="demos">
+  <div class="section-head reveal">
+    <div>
+      <p class="eyebrow"><span></span>Live demos</p>
+      <h2>The <em>labs.</em></h2>
+    </div>
+    <p>Every demo below runs entirely in your browser on clearly-labeled sample data. The section closes with two academic case studies.</p>
   </div>
 
   <!-- 01 REAL PROJECT -->
@@ -383,8 +616,8 @@ footer p{margin:0}
         <h3>Pakistan Flood Prediction System.</h3>
         <p>A transparent flood-risk system for Pakistan that brings rainfall, river conditions, soil saturation, seasonality and verified alerts into one explainable regional assessment. Built end-to-end: data ingestion, risk scoring, reporting, and a hosted interactive dashboard.</p>
         <div class="project-actions">
-          <a class="button" href="https://muhammadsamiullah1097-rgb.github.io/PakistanFloodPredictionTool/" target="_blank" rel="noopener">Open live dashboard <b>↗</b></a>
-          <a class="link" href="https://github.com/muhammadsamiullah1097-rgb/PakistanFloodPredictionTool" target="_blank" rel="noopener">GitHub repo <b>↗</b></a>
+          <a class="button" href="https://muhammadsamiullah1097-rgb.github.io/PakistanFloodPredictionTool/" target="_blank" rel="noopener">View live demo <b>↗</b></a>
+          <a class="link" href="https://github.com/muhammadsamiullah1097-rgb/PakistanFloodPredictionTool" target="_blank" rel="noopener">Open project <b>↗</b></a>
         </div>
       </div>
       <div class="signal-panel">
@@ -425,7 +658,6 @@ footer p{margin:0}
     </div>
   </article>
 
-  <span id="demos" style="display:block;position:relative;top:-96px" aria-hidden="true"></span>
   <!-- 02 SALES DASHBOARD -->
   <article class="project reveal" id="proj-sales">
     <div class="project-top"><span>02 / Interactive dashboard</span><span>◈ Demo · sample data</span></div>
@@ -564,6 +796,8 @@ footer p{margin:0}
     </div>
   </article>
 
+  <div class="sec-div reveal" aria-hidden="true"><span>◆</span> Case studies · academic</div>
+
   <!-- 06 ACADEMIC PROJECT -->
   <article class="project reveal" id="proj-acad-data">
     <div class="project-top"><span>06 / Academic project</span><span>COMSATS · Apr–May 2026</span></div>
@@ -600,13 +834,13 @@ footer p{margin:0}
     </div>
   </article>
 </section>
-<!-- CAPABILITIES -->
-<section class="band shell" id="capabilities">
-  <p class="eyebrow reveal"><span></span>Capabilities</p>
-  <h2 class="reveal">Skills, backed by <em>evidence.</em></h2>
-  <p class="sub reveal">Click a skill to see exactly which projects demonstrate it.</p>
-  <div class="cap-chips reveal" id="capChips" role="group" aria-label="Skill filter"></div>
-  <p class="cap-hint reveal" id="capHint"></p>
+<!-- TOOLS & LANGUAGES -->
+<section class="band shell" id="tools">
+  <p class="eyebrow reveal"><span></span>Toolbox</p>
+  <h2 class="reveal">Tools &amp; <em>languages.</em></h2>
+  <p class="sub reveal">What I work with every week — click any card to spotlight the projects it powers.</p>
+  <div class="tools-grid reveal" id="toolsGrid" role="group" aria-label="Tools filter"></div>
+  <p class="cap-hint reveal" id="toolHint"></p>
 </section>
 
 <!-- EXPERIENCE / EDUCATION -->
@@ -639,33 +873,108 @@ footer p{margin:0}
 
 <!-- ABOUT -->
 <section class="about shell" id="about">
-  <div class="about-stamp reveal"><span>MSU</span><p>DATA / BUSINESS<br>/ CURIOSITY</p></div>
+  <div class="reveal">
+    <figure class="about-figure">
+      <img src="assets/profile.png" alt="Portrait of Muhammad Sami Ullah">
+      <figcaption><span>Islamabad, PK</span><span>UTC+5</span></figcaption>
+    </figure>
+    <div class="facts-grid">
+      <div class="fact"><span>Location</span><strong>Islamabad, Pakistan</strong></div>
+      <div class="fact"><span>Languages</span><strong>English · Urdu</strong></div>
+      <div class="fact"><span>Education</span><strong>BS Business Data Analysis, COMSATS Islamabad</strong></div>
+      <div class="fact"><span>Focus</span><strong>Python · SQL · BI dashboards</strong></div>
+    </div>
+  </div>
   <div class="reveal">
     <p class="eyebrow"><span></span>About me</p>
-    <h2>I'm interested in the <em>why</em> behind the data.</h2>
-    <p>I'm <strong>Muhammad Sami Ullah</strong>, a Business Data Analysis student at COMSATS University Islamabad. I work with Python, SQL and visualization tools — Tableau, Power BI, Excel — to turn raw datasets into insights people can act on, through statistical analysis and interactive dashboards.</p>
-    <p style="margin-top:1rem">I want to contribute data-driven solutions to organizations that care about <strong>evidence-based decisions</strong>. I'm a strong communicator, I do my best work in collaborative teams, and I care about technology with real social impact.</p>
-    <div class="about-details">
-      <div><span>Focus</span><strong>Python · SQL<br>Tableau · Power BI · Excel</strong></div>
-      <div><span>Education</span><strong>BS Business Data Analysis<br>COMSATS Islamabad</strong></div>
-      <div><span>Certifications</span><strong>Python for Data Science &amp; AI (IBM)<br>Google Data Analytics · Tableau Specialist<br><span style="color:var(--muted)">— all in progress</span></strong></div>
+    <h2>Analyst by training,<br><em>curious</em> by nature.</h2>
+    <p>I'm <strong>Muhammad Sami Ullah</strong>, a Business Data Analysis undergraduate at COMSATS University Islamabad. I turn raw datasets into decisions — with Python, SQL and visualization tools like Tableau, Power BI and Excel, backed by statistical analysis and interactive dashboards.</p>
+    <p style="margin-top:1rem">I do my best work in collaborative teams, communicate clearly with non-technical stakeholders, and care about technology with real social impact — from a flood-risk tool for Pakistan to volunteering with my university's Social Welfare Committee, where I support data collection and impact reporting alongside a 20+ volunteer team.</p>
+    <p style="margin-top:1rem">Currently working through the <strong>IBM Python for Data Science &amp; AI</strong>, <strong>Google Data Analytics</strong>, <strong>SQL for Data Analysis</strong> and <strong>Tableau Desktop Specialist</strong> certifications.</p>
+    <div class="hobbies">
+      <p class="eyebrow" style="margin-bottom:0"><span></span>Beyond the data</p>
+      <div class="hobby-grid">
+        <span class="hobby"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="9" r="7"/><path d="M9 5.5l2.4 1.7-0.9 2.8H7l-0.9-2.8z"/><path d="M9 2.5v3M14.8 7.2l-2.9.6M12.5 14.6l-1.9-2.2M5.5 14.6l1.9-2.2M3.2 7.2l2.9.6"/></svg>Football</span>
+        <span class="hobby"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M2 14.5l5-8.5 3.2 4.2 2-3 3.8 7.3z"/><circle cx="13.6" cy="4.6" r="1.7"/></svg>Hiking</span>
+        <span class="hobby"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 2v14"/><path d="M4 3.2c3-1.6 5 1.6 8 0 1.2-.6 2-.6 3 0v6.6c-1-.6-1.8-.6-3 0-3 1.6-5-1.6-8 0"/></svg>Drag racing</span>
+        <span class="hobby"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5.5 14.5v-5a4 4 0 018 0v5"/><circle cx="5.5" cy="12.5" r=".9" fill="currentColor"/><circle cx="12.5" cy="12.5" r=".9" fill="currentColor"/><path d="M5.5 6.5L4 5"/></svg>Horse riding</span>
+        <span class="hobby"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M2 7v4M4.8 4.8v8.4M13.2 4.8v8.4M16 7v4M4.8 9h8.4"/></svg>Gym</span>
+        <span class="hobby"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M7 13.5V4.5l8-2v9"/><circle cx="4.8" cy="13.5" r="2.3"/><circle cx="12.8" cy="11.5" r="2.3"/></svg>Clubbing</span>
+        <span class="hobby"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="6" width="14" height="10" rx="2"/><circle cx="9" cy="11" r="3"/><path d="M6 6l1.2-2.4h3.6L12 6" stroke-linejoin="round"/></svg>Photography</span>
+      </div>
+      <p class="baloch-note">I'm <strong>Baloch</strong>, with roots in Balochistan — and I never miss a chance to photograph its mountains, deserts and coastlines. The same eye I bring to a landscape, I bring to a dataset: look closer, and the story appears.</p>
     </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section class="band shell" id="resume">
+  <p class="eyebrow reveal"><span></span>Resume</p>
+  <h2 class="reveal">The CV, <em>on the web.</em></h2>
+  <p class="sub reveal">Read it right here in your browser — or grab the PDF for your files.</p>
+  <div class="resume-actions reveal">
+    <button class="button" id="viewCvBtn" type="button">View CV online <b>↗</b></button>
+    <a class="button-ghost" href="assets/Muhammad-Sami-Ullah-CV.pdf" download="Muhammad-Sami-Ullah-CV.pdf">Download CV <b>↓</b></a>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="contact shell" id="contact">
-  <p class="eyebrow reveal"><span></span>Contact</p>
-  <h2 class="reveal">Let's build<br>something <em>useful.</em></h2>
-  <p class="reveal">Have a project, opportunity, or question? Email or call me directly and I'll get back to you.</p>
-  <div class="reveal" style="margin-top:.8rem">
-    <a class="button" id="contactEmail" href="#">muhammadsamiullah1097@gmail.com <b>↗</b></a><button class="copy-btn" id="copyEmail" type="button">Copy email</button>
+  <p class="eyebrow reveal"><span></span>Contact me</p>
+  <h2 class="reveal">Let's work<br><em>together.</em></h2>
+  <div class="contact-grid">
+    <form class="cform reveal" id="cForm" novalidate aria-label="Contact form">
+      <div class="field">
+        <input id="cName" name="name" type="text" placeholder=" " autocomplete="name" aria-describedby="eName">
+        <label for="cName">Your name</label>
+        <span class="f-err" id="eName">Please tell me your name.</span>
+      </div>
+      <div class="field">
+        <input id="cEmail" name="email" type="email" placeholder=" " autocomplete="email" aria-describedby="eEmail">
+        <label for="cEmail">Email address</label>
+        <span class="f-err" id="eEmail">Enter a valid email address.</span>
+      </div>
+      <div class="field">
+        <textarea id="cMsg" name="message" placeholder=" " aria-describedby="eMsg"></textarea>
+        <label for="cMsg">Your message</label>
+        <span class="f-err" id="eMsg">Write a few words about your project or question.</span>
+      </div>
+      <button class="button" id="cSend" type="submit">Send message <b>→</b></button>
+      <p class="c-status" id="cStatus" role="status" aria-live="polite"></p>
+    </form>
+    <div class="c-direct reveal">
+      <h3>Prefer it direct?</h3>
+      <p>Reach me on any of these — I usually reply within a day.</p>
+      <div class="c-row">
+        <a class="button" id="contactEmail" href="#">muhammadsamiullah1097@gmail.com <b>↗</b></a>
+        <button class="button-ghost" id="copyEmail" type="button">Copy email</button>
+      </div>
+      <a class="c-line" id="contactPhone" href="#"><span>Phone</span><strong>+92 332 1983086</strong><b>↗</b></a>
+      <a class="c-line" id="contactGithub" href="#" target="_blank" rel="noopener"><span>GitHub</span><strong>muhammadsamiullah1097-rgb</strong><b>↗</b></a>
+      <a class="c-line" id="contactLinkedin" href="#" target="_blank" rel="noopener"><span>LinkedIn</span><strong>Connect</strong><b>↗</b></a>
+      <a class="c-line" href="https://maps.google.com/?q=Islamabad,Pakistan" target="_blank" rel="noopener"><span>Based in</span><strong>Islamabad, Pakistan</strong><b>↗</b></a>
+    </div>
   </div>
-  <a class="github-link reveal" id="contactPhone" href="#">+92 332 1983086</a>
-  <a class="github-link reveal" id="contactGithub" href="#" target="_blank" rel="noopener">GitHub profile <b>↗</b></a>
-  <a class="github-link reveal" id="contactLinkedin" href="#" target="_blank" rel="noopener">LinkedIn <b>↗</b></a>
-  <p class="contact-loc reveal">Islamabad, Pakistan</p>
 </section>
+<!-- PROJECT MODAL -->
+<div class="modal" id="projModal" aria-hidden="true">
+  <div class="modal-overlay" data-close></div>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+    <button class="modal-x" data-close aria-label="Close project details">✕</button>
+    <div id="pmBody"></div>
+  </div>
+</div>
+<!-- CV MODAL -->
+<div class="modal" id="cvModal" aria-hidden="true">
+  <div class="modal-overlay" data-close></div>
+  <div class="modal-box modal-wide" role="dialog" aria-modal="true" aria-labelledby="cvTitle">
+    <button class="modal-x" data-close aria-label="Close CV viewer">✕</button>
+    <p class="pm-type">Resume · PDF</p>
+    <h3 class="pm-title" id="cvTitle">Muhammad Sami Ullah — CV</h3>
+    <div class="cv-frame"><iframe id="cvFrame" data-src="assets/Muhammad-Sami-Ullah-CV.pdf" title="CV of Muhammad Sami Ullah"></iframe></div>
+    <p class="cv-fallback">Can't see the preview on your device? <a href="assets/Muhammad-Sami-Ullah-CV.pdf" target="_blank" rel="noopener">Open in new tab ↗</a> or use the download button.</p>
+  </div>
+</div>
 </main>
 
 <footer>
@@ -717,7 +1026,7 @@ const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov
     const hb = document.createElement("a");
     hb.className = "link"; hb.href = siteConfig.resumeUrl;
     hb.target = "_blank"; hb.rel = "noopener";
-    hb.innerHTML = 'Download resume <b>↗</b>';
+    hb.innerHTML = 'Download CV <b>↓</b>';
     $("#heroActions").appendChild(hb);
   } else { rb.style.display = "none"; }
   $("#year").textContent = new Date().getFullYear();
@@ -1038,43 +1347,48 @@ $("#baAfter").addEventListener("click", function(){ if(!$("#baAfter").disabled) 
 renderCleanStats(); renderCleanTable();
 
 /* ============================================================
-   CAPABILITIES — skill → project mapping
+   TOOLS & LANGUAGES — tool → project mapping
    ============================================================ */
-const skillMap = {
-  "Python": ["proj-flood","proj-sales","proj-nlp","proj-clean","proj-acad-data"],
-  "SQL": ["proj-flood","proj-sales","proj-sql","proj-acad-data","proj-acad-db"],
-  "Data Visualization": ["proj-sales","proj-nlp","proj-acad-data"],
-  "Tableau": ["proj-sales","proj-acad-data"],
-  "Power BI": ["proj-sales"],
-  "Microsoft Excel": ["proj-sales","proj-clean"],
-  "Database Management": ["proj-sql","proj-acad-db"],
-  "Statistical Analysis": ["proj-nlp","proj-acad-data","proj-clean"],
-  "Problem-Solving": ["proj-flood","proj-clean","proj-acad-data"],
-  "Analytical Thinking": ["proj-flood","proj-sql","proj-acad-data"]
+const toolMap = {
+  "Python": { cat:"Language", line:"Analysis pipelines, automation and text workflows.", ids:["flood","sales","nlp","clean","acad-data"] },
+  "SQL": { cat:"Language", line:"Extraction, transformation and aggregation queries.", ids:["flood","sales","sql","acad-data","acad-db"] },
+  "Tableau": { cat:"Visualization", line:"Interactive KPI dashboards for stakeholders.", ids:["sales","acad-data"] },
+  "Power BI": { cat:"Visualization", line:"Business dashboards and reporting views.", ids:["sales"] },
+  "Excel": { cat:"Analysis", line:"Reporting, quick analysis and data prep.", ids:["sales","clean"] },
+  "Pandas · NumPy · Matplotlib": { cat:"Python stack", line:"Wrangling, statistics and publication-style charts.", ids:["acad-data","sales","clean"] },
+  "MySQL": { cat:"Database", line:"Normalized schemas, procedures and triggers.", ids:["sql","acad-db"] },
+  "Git & GitHub": { cat:"Workflow", line:"Version control and deployed Pages sites.", ids:["flood"] }
 };
-function renderCapChips(){
-  $("#capChips").innerHTML = Object.keys(skillMap).map(function(s){ return '<button aria-pressed="false">'+s+"</button>"; }).join("");
+function renderTools(){
+  $("#toolsGrid").innerHTML = Object.keys(toolMap).map(function(t){
+    var d = toolMap[t];
+    return '<button class="tool-card" aria-pressed="false" data-tool="'+t+'">'
+      + '<span class="tool-cat">'+d.cat+'</span>'
+      + '<span class="tool-name">'+t+'</span>'
+      + '<span class="tool-line">'+d.line+'</span>'
+      + '<span class="tool-link">See in projects <b>→</b></span></button>';
+  }).join("");
 }
-function clearSkill(){
-  $$("#capChips button").forEach(function(b){ b.setAttribute("aria-pressed","false"); });
-  $$(".project").forEach(function(p){ p.classList.remove("lit"); p.classList.remove("dim"); });
-  $("#capHint").innerHTML = 'Showing all projects. <button id="capReset">Reset</button>';
-  $("#capReset").addEventListener("click", clearSkill);
+function clearTools(){
+  $$("#toolsGrid .tool-card").forEach(function(b){ b.setAttribute("aria-pressed","false"); });
+  $$(".proj-card").forEach(function(p){ p.classList.remove("lit"); p.classList.remove("dim"); });
+  $("#toolHint").innerHTML = 'Click a tool to spotlight the projects it powers. <button id="toolReset">Reset</button>';
+  $("#toolReset").addEventListener("click", clearTools);
 }
-renderCapChips(); clearSkill();
-$("#capChips").addEventListener("click", function(e){
-  const b = e.target.closest("button"); if(!b) return;
-  const skill = b.textContent, ids = skillMap[skill] || [];
-  $$("#capChips button").forEach(function(x){ x.setAttribute("aria-pressed", x===b?"true":"false"); });
-  $$(".project").forEach(function(p){
-    const hit = ids.indexOf(p.id) > -1;
+renderTools(); clearTools();
+$("#toolsGrid").addEventListener("click", function(e){
+  var b = e.target.closest(".tool-card"); if(!b) return;
+  var tool = b.dataset.tool, ids = toolMap[tool].ids;
+  $$("#toolsGrid .tool-card").forEach(function(x){ x.setAttribute("aria-pressed", x===b?"true":"false"); });
+  $$(".proj-card").forEach(function(p){
+    var hit = ids.indexOf(p.dataset.proj) > -1;
     p.classList.toggle("lit", hit);
     p.classList.toggle("dim", !hit);
   });
-  $("#capHint").innerHTML = '<strong>'+skill+'</strong> is demonstrated in '+ids.length+' project'+(ids.length===1?"":"s")+'. <button id="capReset">Reset</button>';
-  $("#capReset").addEventListener("click", clearSkill);
-  const first = document.getElementById(ids[0]);
-  if(first && typeof first.scrollIntoView === "function"){ setTimeout(function(){ first.scrollIntoView({behavior: reduceMotion?"auto":"smooth", block:"center"}); }, 150); }
+  $("#toolHint").innerHTML = '<strong>'+tool+'</strong> powers '+ids.length+' project'+(ids.length===1?"":"s")+'. <button id="toolReset">Reset</button>';
+  $("#toolReset").addEventListener("click", clearTools);
+  var grid = $("#projGrid");
+  if(grid && typeof grid.scrollIntoView === "function"){ setTimeout(function(){ grid.scrollIntoView({behavior: reduceMotion?"auto":"smooth", block:"center"}); }, 150); }
 });
 
 /* ============================================================
@@ -1123,10 +1437,181 @@ document.querySelector("#video-form").addEventListener("submit", function(event)
 if(projectVideoUrl) loadVideo(projectVideoUrl, false);
 
 /* ============================================================
+   PROJECT DATA + MODAL
+   ============================================================ */
+const projectData = {
+  "flood": {
+    type: "Decision-support tool · Live",
+    title: "Pakistan Flood Prediction System.",
+    desc: "A transparent flood-risk system for Pakistan that brings rainfall, river conditions, soil saturation, seasonality and verified alerts into one explainable regional assessment — built end-to-end, from data ingestion to a hosted interactive dashboard.",
+    tools: ["Python","Open-Meteo (forecast + archive)","Open-Meteo Flood / GloFAS","NASA POWER","GDACS","ReliefWeb","PMD advisories + NLP analyzer"],
+    feats: ["78-city Pakistan gazetteer","River-specific ML model with an inspectable rule-based fallback","Explainable reasoning traces shipped in JSON and Markdown","Hosted dashboard: Scenario Lab with sliders, instant recalculation and a live Open-Meteo rain feed"],
+    links: [
+      { t:"View live demo", h:"https://muhammadsamiullah1097-rgb.github.io/PakistanFloodPredictionTool/" },
+      { t:"Open project", h:"https://github.com/muhammadsamiullah1097-rgb/PakistanFloodPredictionTool" }
+    ],
+    badge: "Real project · live system — the panel above is a sample-data preview",
+    launchLabel: "Launch live demo", target: "proj-flood"
+  },
+  "sales": {
+    type: "Business intelligence · Demo",
+    title: "Sales Intelligence Lab.",
+    desc: "Change the year or region and watch every KPI and chart recompute from one deterministic dataset. Hover any point for exact values.",
+    tools: ["JavaScript","SVG charts","Deterministic sample dataset"],
+    feats: ["Year + region filters recompute every KPI","Monthly revenue line chart with hover tooltips","Revenue-by-region bar chart","One source of truth — the same discipline a real BI model needs"],
+    links: [],
+    badge: "Interactive demo · sample data — figures are illustrative",
+    launchLabel: "Launch live demo", target: "proj-sales"
+  },
+  "nlp": {
+    type: "Natural language processing · Demo",
+    title: "NLP Sentiment Lab.",
+    desc: "Paste any text and get an instant sentiment breakdown — computed entirely in your browser.",
+    tools: ["JavaScript","Curated sentiment lexicon","Tokenizer"],
+    feats: ["Positive / neutral / negative scoring with confidence","Distribution bars and keyword extraction","No server — runs 100% client-side","Honest labeling: a sample lexicon, not an ML model"],
+    links: [],
+    badge: "Runs fully in your browser · sample lexicon",
+    launchLabel: "Launch live demo", target: "proj-nlp"
+  },
+  "sql": {
+    type: "SQL · Data exploration · Demo",
+    title: "SQL Explorer.",
+    desc: "Pick a preset query, read the SQL, run it, and inspect the result set — a simulated query console.",
+    tools: ["SQL (simulated)","Aggregation","Grouping + ordering"],
+    feats: ["Four preset business queries","Readable SQL shown for each","Deterministic, precomputed result sets","Presented honestly as a simulation"],
+    links: [],
+    badge: "Interactive demo · sample data",
+    launchLabel: "Launch live demo", target: "proj-sql"
+  },
+  "clean": {
+    type: "Data quality · Demo",
+    title: "Data Cleaning Lab.",
+    desc: "Watch a messy dataset get fixed: missing values handled, duplicates removed, quality score recomputed. Toggle between before and after.",
+    tools: ["Pandas-style workflow","Data auditing","Deterministic transforms"],
+    feats: ["Five live quality metrics","Animated cleaning pass with a quality-score climb","Before/after toggle","Cell-level dirty / fixed highlighting"],
+    links: [],
+    badge: "Interactive demo · sample data",
+    launchLabel: "Launch live demo", target: "proj-clean"
+  },
+  "acad-data": {
+    type: "Academic project · COMSATS · Apr–May 2026",
+    title: "End-to-End Data Analysis Project.",
+    desc: "A faculty-recognized academic project: a complete analysis workflow on real-world datasets — Python for the analysis, Tableau for interactive KPI dashboards, advanced SQL for extraction and transformation.",
+    tools: ["Python","Pandas","NumPy","Matplotlib","Tableau","SQL"],
+    feats: ["Cleaning to exploration to regression and correlation studies","Interactive Tableau KPI dashboards for stakeholders","Recognized by faculty for thoroughness and innovation"],
+    links: [],
+    badge: "Academic project · COMSATS Islamabad",
+    launchLabel: "View project detail", target: "proj-acad-data"
+  },
+  "acad-db": {
+    type: "Academic project · COMSATS · Oct–Nov 2024",
+    title: "NGO Operations Database.",
+    desc: "A normalized relational database for a simulated NGO operations management system — designed for integrity and scale, delivered with a professional technical report.",
+    tools: ["MySQL","ER modeling","Stored procedures","Triggers"],
+    feats: ["Normalized schema with ER diagrams and documented rationale","Full CRUD operations","Integrity enforced at the database level","Review-ready technical documentation"],
+    links: [],
+    badge: "Academic project · COMSATS Islamabad",
+    launchLabel: "View project detail", target: "proj-acad-db"
+  }
+};
+/* ---------- generic modal ---------- */
+let lastFocus = null;
+function openModal(m){
+  lastFocus = document.activeElement;
+  m.classList.add("open");
+  m.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+  const x = m.querySelector(".modal-x");
+  if(x) x.focus();
+}
+function closeModal(m){
+  m.classList.remove("open");
+  m.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+  if(lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+}
+$$(".modal").forEach(function(m){
+  m.addEventListener("click", function(e){
+    if(e.target.closest("[data-close]")) closeModal(m);
+  });
+});
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape"){ $$(".modal.open").forEach(closeModal); }
+});
+/* ---------- project modal ---------- */
+function pmHTML(d){
+  const tools = d.tools.map(function(t){ return "<li>"+t+"</li>"; }).join("");
+  const feats = d.feats.map(function(f){ return "<li>"+f+"</li>"; }).join("");
+  const links = d.links.map(function(l){ return '<a class="link" href="'+l.h+'" target="_blank" rel="noopener">'+l.t+' <b>↗</b></a>'; }).join("");
+  return '<p class="pm-type">'+d.type+'</p>'
+    + '<h3 class="pm-title" id="pmTitle">'+d.title+'</h3>'
+    + '<p class="pm-desc">'+d.desc+'</p>'
+    + '<div class="pm-cols"><div><h4>Tools</h4><ul class="pm-tools">'+tools+'</ul></div>'
+    + '<div><h4>Highlights</h4><ul class="pm-feats">'+feats+'</ul></div></div>'
+    + (links ? '<div class="pm-links">'+links+'</div>' : '')
+    + '<p><span class="demo-badge">'+d.badge+'</span></p>'
+    + '<div class="pm-actions"><button class="button" id="pmLaunch" type="button">'+d.launchLabel+' <b>→</b></button>'
+    + '<button class="button-ghost" data-close type="button">Close</button></div>';
+}
+function openProject(key){
+  const d = projectData[key]; if(!d) return;
+  $("#pmBody").innerHTML = pmHTML(d);
+  $("#pmLaunch").addEventListener("click", function(){
+    closeModal($("#projModal"));
+    const t = document.getElementById(d.target);
+    if(t){
+      t.classList.add("flash");
+      setTimeout(function(){ t.classList.remove("flash"); }, 1700);
+      if(typeof t.scrollIntoView === "function"){ t.scrollIntoView({behavior: reduceMotion?"auto":"smooth", block:"start"}); }
+    }
+  });
+  openModal($("#projModal"));
+}
+$$(".proj-card").forEach(function(c){
+  c.addEventListener("click", function(){ openProject(c.dataset.proj); });
+});
+/* ---------- CV modal ---------- */
+$("#viewCvBtn").addEventListener("click", function(){
+  const f = $("#cvFrame");
+  if(f && !f.getAttribute("src")) f.setAttribute("src", f.dataset.src);
+  openModal($("#cvModal"));
+});
+/* ============================================================
+   CONTACT FORM — validates, then opens the visitor's email app
+   (honest static-site approach: mailto with prefilled content)
+   ============================================================ */
+function buildMailto(name, email, msg){
+  const subject = "Portfolio enquiry from " + name;
+  const body = msg + "\n\n— " + name + " (" + email + ")";
+  return "mailto:" + siteConfig.email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+}
+$("#cForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const name = $("#cName").value.trim(), email = $("#cEmail").value.trim(), msg = $("#cMsg").value.trim();
+  let ok = true;
+  const check = function(cond, fieldId, errId){
+    $("#"+fieldId).closest(".field").classList.toggle("invalid", !cond);
+    $("#"+errId).classList.toggle("show", !cond);
+    if(!cond) ok = false;
+  };
+  check(name.length > 1, "cName", "eName");
+  check(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), "cEmail", "eEmail");
+  check(msg.length > 3, "cMsg", "eMsg");
+  const st = $("#cStatus");
+  if(!ok){ st.textContent = ""; return; }
+  const btn = $("#cSend");
+  btn.disabled = true;
+  btn.innerHTML = "Opening your email app…";
+  st.textContent = "Composing your message — your email app should open now.";
+  window.location.href = buildMailto(name, email, msg);
+  setTimeout(function(){ btn.disabled = false; btn.innerHTML = 'Send message <b>→</b>'; }, 2500);
+});
+
+/* ============================================================
    NAV active section + scroll reveals
    ============================================================ */
 const navLinks = $$("[data-nav]");
-const sections = ["work","demos","about","contact"];
+const sections = ["projects","demos","tools","about","contact"];
 if(typeof IntersectionObserver !== "undefined"){
   const navObs = new IntersectionObserver(function(entries){
     entries.forEach(function(en){
