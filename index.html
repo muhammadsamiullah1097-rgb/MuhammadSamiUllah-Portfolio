@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Sami Ullah — Business Data Analytics Portfolio</title>
+<meta name="description" content="Interactive portfolio of Muhammad Sami Ullah, Business Data Analytics. Explore live demos: sales intelligence dashboard, NLP sentiment lab, SQL explorer, data cleaning lab — plus the real Pakistan Flood Prediction System.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#080d11; --surface:#101a20; --surface2:#0b1418; --line:rgba(232,246,244,.14);
+  --text:#eef7f4; --muted:#9cafae; --acid:#b8ff48; --blue:#78ddff;
+  --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--acid);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3,p{margin-top:0}
+h1,h2,h3{line-height:.96;letter-spacing:-.07em}
+h1 em,h2 em{color:var(--acid);font-style:normal}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--acid);outline-offset:3px}
+.skip-link{position:fixed;top:-4rem;left:1rem;z-index:60;padding:.8rem 1rem;color:var(--ink);background:var(--acid);font-weight:800}
+.skip-link:focus{top:1rem}
+.shell{max-width:1440px;margin:auto;padding-left:clamp(1.3rem,5vw,5.4rem);padding-right:clamp(1.3rem,5vw,5.4rem)}
+section[id],article[id]{scroll-margin-top:96px}
+/* ---------- header ---------- */
+.header{height:80px;display:flex;align-items:center;gap:2rem;padding:0 clamp(1.3rem,5vw,5.4rem);border-bottom:1px solid var(--line);background:rgba(8,13,17,.88);backdrop-filter:blur(14px);position:sticky;top:0;z-index:50}
+.wordmark{font:800 1.1rem var(--mono);letter-spacing:-.09em}
+.wordmark span{color:var(--acid)}
+.nav-links{display:flex;gap:1.7rem;margin-left:auto;align-items:center}
+.nav-links a{font-size:.69rem;font-weight:800;letter-spacing:.02em;color:var(--muted);padding:.3rem 0;position:relative;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--text)}
+.nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--acid)}
+/* ---------- type + buttons ---------- */
+.eyebrow{margin:0 0 1.3rem;display:flex;gap:.55rem;align-items:center;color:var(--muted);font:500 .62rem var(--mono);text-transform:uppercase;letter-spacing:.12em}
+.eyebrow span{width:25px;height:1px;background:var(--acid)}
+.button{border:0;display:inline-flex;align-items:center;justify-content:center;gap:.7rem;padding:.95rem 1.05rem;background:var(--acid);color:var(--ink);font-size:.67rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:transform .2s,background .2s}
+.button:hover{transform:translateY(-2px);background:#ccff8d}
+.button b{font-size:1rem;font-weight:800}
+.button-sm{padding:.7rem .85rem}
+.link{display:inline-flex;align-items:center;gap:.35rem;font-size:.69rem;font-weight:800;letter-spacing:.02em;padding-bottom:.24rem;border-bottom:1px solid rgba(238,247,244,.35);cursor:pointer;background:none;border-top:0;border-left:0;border-right:0}
+.link b{color:var(--acid);font-size:.95rem}
+/* ---------- hero ---------- */
+.hero{min-height:650px;padding-top:4.3rem;padding-bottom:4.3rem;display:grid;grid-template-columns:.9fr 1.1fr;align-items:center;gap:clamp(3rem,8vw,9rem)}
+.hero h1{font-size:clamp(3.8rem,7vw,7.3rem);margin-bottom:1.35rem}
+.hero-profession{font-size:clamp(1.1rem,1.6vw,1.45rem);font-weight:700;letter-spacing:-.04em;max-width:440px;margin-bottom:.9rem}
+.hero-intro{max-width:440px;color:var(--muted);font-size:.9rem;line-height:1.68}
+.hero-actions{display:flex;align-items:center;gap:1.4rem;margin-top:2rem;flex-wrap:wrap}
+/* ---------- signal panel ---------- */
+.signal-panel{align-self:center;padding:1rem;border:1px solid rgba(184,255,72,.26);background:#091116;box-shadow:17px 17px 0 rgba(184,255,72,.055)}
+.signal-panel-head,.signal-location,.signal-score{display:flex;align-items:center;justify-content:space-between}
+.signal-panel-head{color:var(--muted);font:500 .55rem var(--mono);letter-spacing:.075em;text-transform:uppercase}
+.signal-panel-head span:first-child{color:var(--acid)}
+.signal-location{margin-top:1.1rem;padding:.75rem;background:#101d22}
+.signal-location small{display:block;color:var(--muted);font:500 .52rem var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.signal-location strong{font-size:.86rem;letter-spacing:-.03em}
+.status{color:var(--acid);font:500 .53rem var(--mono);letter-spacing:.05em;display:inline-flex;align-items:center}
+.status i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--acid);box-shadow:0 0 9px var(--acid);margin-right:.35rem}
+.signal-score{gap:1rem;margin:1.1rem 0}
+.dial{width:116px;aspect-ratio:1;border-radius:50%;padding:7px;background:conic-gradient(var(--acid) calc(var(--dial,58)*1%),#26373a 0);display:grid;place-items:center;flex:none}
+.dial>div{width:100%;height:100%;border-radius:50%;display:grid;place-content:center;text-align:center;background:#091116;padding:.4rem}
+.dial small,.dial span{display:block;color:var(--muted);font:500 .48rem var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.dial strong{font-size:1.7rem;line-height:1.05;letter-spacing:-.06em}
+.signal-score p{margin:0 0 .3rem;color:var(--acid);font-weight:800;font-size:1.1rem;letter-spacing:-.045em}
+.signal-score>div:last-child small{color:var(--muted);font:500 .58rem/1.4 var(--mono)}
+.signal-bars{padding:.3rem .75rem;background:#101c21}
+.signal-bars>div{display:grid;grid-template-columns:64px 1fr 58px;gap:.6rem;align-items:center;padding:.6rem 0;border-bottom:1px solid rgba(238,247,244,.08)}
+.signal-bars>div:last-child{border-bottom:0}
+.signal-bars span,.signal-bars b{font:500 .53rem var(--mono);letter-spacing:.045em}
+.signal-bars span{color:var(--muted);text-transform:uppercase}
+.signal-bars b{text-align:right;color:var(--text);font-weight:500}
+.signal-bars i{height:4px;background:linear-gradient(90deg,var(--acid) var(--value,50%),#2e4142 var(--value,50%));display:block;cursor:pointer}
+.signal-note{margin:1rem 0 0;color:#788889;font:400 .57rem/1.55 var(--mono)}
+/* hero metric tabs */
+.metric-tabs{display:flex;gap:.5rem;margin-top:1.1rem;flex-wrap:wrap}
+.metric-tabs button{background:transparent;border:1px solid var(--line);color:var(--muted);font:500 .6rem var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:.55rem .8rem;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
+.metric-tabs button[aria-pressed="true"]{background:var(--acid);border-color:var(--acid);color:var(--ink);font-weight:700}
+.metric-tabs button:hover:not([aria-pressed="true"]){border-color:var(--acid);color:var(--text)}
+/* ---------- identity strip ---------- */
+.identity-strip{height:54px;overflow:hidden;white-space:nowrap;display:flex;align-items:center;background:var(--acid);color:var(--ink);font:800 .68rem var(--mono);letter-spacing:.075em;text-transform:uppercase}
+.identity-strip div{animation:marquee 22s linear infinite}
+.identity-strip span{padding:0 1.3rem}
+@keyframes marquee{to{transform:translateX(-25%)}}
+/* ---------- sections ---------- */
+.work{padding-top:8.5rem;padding-bottom:3rem}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:3rem;margin-bottom:3rem}
+.section-head h2{font-size:clamp(2.7rem,4.8vw,5.3rem);margin:0}
+.section-head>p{max-width:270px;color:var(--muted);font-size:.86rem;line-height:1.6;margin:0 0 .3rem}
+.band{padding-top:3rem;padding-bottom:8.5rem}
+.band h2{font-size:clamp(2.7rem,4.8vw,5.3rem);margin:0 0 1rem}
+.band .sub{color:var(--muted);font-size:.9rem;max-width:520px;margin:0}
+/* ---------- project card ---------- */
+.project{border:1px solid var(--line);background:linear-gradient(135deg,#132027,#0e151b 72%);margin-bottom:4rem;transition:border-color .25s,box-shadow .25s,opacity .25s}
+.project:last-child{margin-bottom:0}
+.project.dim{opacity:.32;filter:saturate(.4)}
+.project.lit{border-color:var(--acid);box-shadow:0 0 0 1px var(--acid),0 18px 60px -20px rgba(184,255,72,.28)}
+.project-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.25rem;border-bottom:1px solid var(--line);color:var(--muted);font:500 .57rem var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.project-top span:last-child{color:var(--acid)}
+.project-main{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,6vw,6rem);padding:clamp(1.4rem,4.5vw,4rem)}
+.project-main.single{grid-template-columns:1fr}
+.project-type{margin:0 0 .6rem;color:var(--acid);font:500 .58rem var(--mono);text-transform:uppercase;letter-spacing:.08em}
+.project h3{font-size:clamp(2.5rem,4.3vw,4.8rem);margin-bottom:1.25rem}
+.project-intro>p:not(.project-type){max-width:460px;color:var(--muted);font-size:.9rem;line-height:1.68}
+.project-actions{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;margin-top:1.7rem}
+.project-facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.project-facts>div{padding:1.3rem;border-right:1px solid var(--line)}
+.project-facts>div:last-child{border-right:0}
+.project-facts span{display:block;color:var(--acid);font:500 .55rem var(--mono);letter-spacing:.07em;text-transform:uppercase}
+.project-facts p{margin:.65rem 0 0;color:#bdccca;font-size:.69rem;line-height:1.55}
+/* demo badge */
+.demo-badge{display:inline-flex;align-items:center;gap:.45rem;color:var(--muted);font:500 .58rem var(--mono);letter-spacing:.06em;text-transform:uppercase;border:1px dashed rgba(184,255,72,.4);padding:.45rem .7rem;margin-top:.9rem}
+.demo-badge::before{content:"◈";color:var(--acid)}
+/* ---------- video slot ---------- */
+.project-video{padding:0 clamp(1.4rem,4.5vw,4rem) 2.2rem}
+.video-card{min-height:300px;border:1px solid var(--line);background:#0e171c;display:flex;flex-direction:column}
+.video-empty{flex:1;min-height:190px;padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle at 50% 50%,rgba(120,221,255,.09),transparent 38%),linear-gradient(145deg,#14272b,#0d151a)}
+.video-empty strong{font-size:1.25rem;letter-spacing:-.04em}
+.video-empty p{max-width:260px;margin:.5rem 0 0;color:var(--muted);font-size:.75rem;line-height:1.5}
+.play{display:grid;place-items:center;width:48px;height:48px;border:1px solid var(--acid);border-radius:50%;margin-bottom:1rem;color:var(--acid);font-size:1rem;padding-left:3px}
+.video-card iframe{width:100%;aspect-ratio:16/9;border:0;background:#0a0f13}
+#video-form{padding:1rem;border-top:1px solid var(--line)}
+#video-form label{display:block;color:var(--muted);font:500 .55rem var(--mono);letter-spacing:.07em;text-transform:uppercase;margin-bottom:.5rem}
+#video-form>div{display:flex;gap:.55rem}
+#video-form input{flex:1;min-width:0;color:var(--text);background:#111d22;border:1px solid var(--line);padding:.7rem;font:400 .62rem var(--mono);outline:0}
+#video-form input:focus{border-color:var(--acid)}
+#video-form button{border:0;background:var(--acid);color:var(--ink);padding:0 .85rem;font-size:.6rem;font-weight:800;cursor:pointer;text-transform:uppercase;letter-spacing:.05em}
+#video-message{margin:.6rem 0 0;color:#77898a;font:400 .53rem/1.5 var(--mono)}
+#video-message code{color:var(--acid)}
+/* ---------- demo consoles ---------- */
+.demo-wrap{padding:0 clamp(1.4rem,4.5vw,4rem) clamp(1.2rem,3vw,2rem)}
+.console{border:1px solid var(--line);background:var(--surface2);padding:clamp(1rem,2.5vw,1.6rem)}
+.console-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;color:var(--muted);font:500 .58rem var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.2rem}
+.dash-controls{display:flex;gap:1.4rem;flex-wrap:wrap;margin-bottom:1.4rem;align-items:flex-end}
+.ctl{display:flex;flex-direction:column;gap:.5rem}
+.ctl label{font:500 .58rem var(--mono);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.seg{display:flex;gap:.4rem;flex-wrap:wrap}
+.seg button,.ctl select{background:transparent;border:1px solid var(--line);color:var(--muted);font:700 .72rem var(--sans);padding:.55rem .9rem;cursor:pointer;transition:border-color .18s,color .18s,background .18s}
+.seg button[aria-pressed="true"]{background:var(--acid);border-color:var(--acid);color:var(--ink)}
+.seg button:hover,.ctl select:hover{border-color:var(--acid);color:var(--text)}
+.ctl select option{background:var(--ink);color:var(--text)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin-bottom:1.2rem}
+.kpi{border:1px solid var(--line);padding:1rem;background:var(--surface)}
+.kpi .k-label{font:500 .55rem var(--mono);letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.kpi .k-value{font:800 1.5rem/1.1 var(--sans);letter-spacing:-.03em;margin:.35rem 0 .15rem}
+.kpi .k-sub{font:500 .6rem var(--mono);color:var(--acid)}
+.charts{display:grid;grid-template-columns:1.15fr .85fr;gap:.7rem}
+.chart-card{border:1px solid var(--line);padding:1rem;background:var(--surface)}
+.chart-card h4{font:500 .58rem var(--mono);letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin:0 0 .8rem}
+svg.chart{width:100%;height:auto;display:block}
+.tip{position:fixed;z-index:200;pointer-events:none;background:var(--ink);border:1px solid var(--acid);color:var(--text);font:500 .68rem var(--mono);padding:.4rem .6rem;opacity:0;transition:opacity .12s;white-space:nowrap}
+.point,.bar-rect{cursor:pointer}
+/* terminal */
+.term{border:1px solid var(--line);background:#070c0f}
+.term-bar{display:flex;align-items:center;gap:.6rem;padding:.8rem 1.1rem;border-bottom:1px solid var(--line);font:500 .58rem var(--mono);letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.term-bar .dots{display:flex;gap:6px}
+.term-bar .dots i{width:9px;height:9px;border-radius:50%;background:#223228;display:block}
+.term-body{padding:clamp(1rem,2.5vw,1.6rem)}
+.term-body .lbl{display:block;font:500 .58rem var(--mono);letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:.6rem}
+.term textarea{width:100%;min-height:110px;background:var(--surface);border:1px solid var(--line);color:var(--text);padding:.9rem;font:400 .9rem var(--sans);resize:vertical;margin-bottom:1rem}
+.term textarea:focus{border-color:var(--acid);outline:none}
+.term-actions{display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+.nlp-out{margin-top:1.2rem;display:none}
+.nlp-out.show{display:block}
+.nlp-score{font:800 2rem/1.1 var(--sans);letter-spacing:-.04em;margin:.4rem 0}
+.sent-pos{color:var(--acid)}.sent-neg{color:#ff7a7a}.sent-neu{color:var(--blue)}
+.dist{margin:.9rem 0}
+.dist-row{display:grid;grid-template-columns:90px 1fr 56px;gap:.7rem;align-items:center;margin-bottom:.5rem;font:500 .68rem var(--mono);color:var(--muted)}
+.dist-track{background:#1b262b;height:10px;overflow:hidden}
+.dist-fill{height:100%;background:var(--acid);transition:width .7s cubic-bezier(.22,.9,.3,1)}
+.kw{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
+.kw span{font:500 .68rem var(--mono);background:rgba(184,255,72,.1);color:var(--acid);padding:.3rem .6rem;border:1px solid rgba(184,255,72,.25)}
+.form-err{color:#ff7a7a;font-size:.8rem;margin-top:.6rem;display:none}
+.form-err.show{display:block}
+pre.sql{background:#070c0f;border:1px solid var(--line);padding:1rem;font:400 .78rem/1.7 var(--mono);color:#d7f79b;overflow-x:auto;margin:1rem 0}
+table.data{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:.5rem}
+table.data th{font:500 .6rem var(--mono);letter-spacing:.08em;color:var(--muted);text-align:left;padding:.65rem .7rem;border-bottom:1px solid var(--line);text-transform:uppercase}
+table.data td{padding:.65rem .7rem;border-bottom:1px solid rgba(238,247,244,.06);font:400 .78rem var(--mono)}
+table.data tr:last-child td{border-bottom:none}
+table.data td.dirty{background:rgba(255,122,122,.12)}
+table.data td.fixed{background:rgba(184,255,72,.1)}
+.qchips{display:flex;gap:.5rem;flex-wrap:wrap}
+.qchips button{background:transparent;border:1px solid var(--line);color:var(--muted);font:700 .72rem var(--sans);padding:.6rem 1rem;cursor:pointer;transition:all .18s}
+.qchips button[aria-pressed="true"]{background:var(--acid);color:var(--ink);border-color:var(--acid)}
+.qchips button:hover{border-color:var(--acid);color:var(--text)}
+.exec-note{font:400 .68rem var(--mono);color:var(--muted);margin-top:.8rem}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--line);border-top-color:var(--acid);border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* cleaning lab */
+.clean-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:.7rem;margin:0 0 1.2rem}
+.clean-stat{border:1px solid var(--line);background:var(--surface);padding:1rem;text-align:center}
+.clean-stat .v{font:800 1.5rem/1.1 var(--sans);letter-spacing:-.02em}
+.clean-stat .l{font:500 .55rem var(--mono);letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:.35rem}
+.clean-actions{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem}
+.ba-toggle{display:flex;gap:.4rem}
+.ba-toggle button{background:transparent;border:1px solid var(--line);color:var(--muted);font:700 .72rem var(--sans);padding:.55rem 1rem;cursor:pointer}
+.ba-toggle button[aria-pressed="true"]{background:var(--acid);border-color:var(--acid);color:var(--ink)}
+.ba-toggle button:disabled{opacity:.35;cursor:not-allowed}
+/* case notes */
+.notes-wrap{padding:0 clamp(1.4rem,4.5vw,4rem) clamp(1.4rem,3vw,2.4rem)}
+.notes-btn{background:none;border:0;color:var(--acid);font:700 .72rem var(--sans);letter-spacing:.05em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem;padding:0}
+.notes-btn .chev{transition:transform .2s;display:inline-block}
+.notes-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.notes-panel{max-height:0;overflow:hidden;transition:max-height .4s ease;color:var(--muted);font-size:.85rem;line-height:1.65}
+.notes-panel.open{max-height:400px}
+.notes-panel p{padding-top:.9rem;margin:0;max-width:680px}
+/* capabilities */
+.cap-chips{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.8rem 0 1rem}
+.cap-chips button{background:transparent;border:1px solid var(--line);color:var(--text);font:700 .72rem var(--sans);letter-spacing:.03em;text-transform:uppercase;padding:.75rem 1.15rem;cursor:pointer;transition:all .18s}
+.cap-chips button:hover{border-color:var(--acid);transform:translateY(-2px)}
+.cap-chips button[aria-pressed="true"]{background:var(--acid);border-color:var(--acid);color:var(--ink)}
+.cap-hint{font:400 .68rem var(--mono);color:var(--muted)}
+.cap-hint button{background:none;border:0;color:var(--acid);font:inherit;cursor:pointer;text-decoration:underline;padding:0}
+.cap-hint strong{color:var(--text)}
+/* experience */
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,4vw,3rem);margin-top:2.2rem}
+.exp-card{border:1px solid var(--line);background:linear-gradient(135deg,#132027,#0e151b 72%);padding:1.8rem}
+.exp-card>span{display:block;color:var(--acid);font:500 .55rem var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.8rem}
+.exp-card strong{font-size:1.25rem;letter-spacing:-.03em;display:block;margin-bottom:.6rem}
+.exp-card .org{color:var(--acid);font-size:.8rem;font-weight:700;margin-bottom:.6rem}
+.exp-card p{color:var(--muted);font-size:.82rem;line-height:1.65;margin:0}
+.exp-card small{display:block;margin-top:1rem;color:var(--muted);font:500 .6rem var(--mono);letter-spacing:.08em;text-transform:uppercase}
+/* about */
+.about{padding-top:1rem;padding-bottom:8.5rem;display:grid;grid-template-columns:.6fr 1.4fr;gap:clamp(3rem,8vw,9rem)}
+.about-stamp{width:170px;height:170px;padding:1rem;border:1px solid var(--acid);display:flex;flex-direction:column;justify-content:space-between}
+.about-stamp span{font:800 3.6rem/.8 var(--sans);letter-spacing:-.13em;color:var(--acid)}
+.about-stamp p{margin:0;color:var(--muted);font:500 .55rem/1.5 var(--mono);letter-spacing:.06em}
+.about h2{margin:.5rem 0 1.4rem;font-size:clamp(2.7rem,4.8vw,5.3rem)}
+.about>div:last-child>p:not(.eyebrow){max-width:570px;color:var(--muted);font-size:.91rem;line-height:1.75}
+.about>div:last-child>p:not(.eyebrow) strong{color:var(--text)}
+.about-details{display:flex;gap:3.5rem;margin-top:2rem}
+.about-details div{display:flex;flex-direction:column;gap:.6rem}
+.about-details span{color:var(--acid);font:500 .55rem var(--mono);text-transform:uppercase;letter-spacing:.08em}
+.about-details strong{font-size:.75rem;line-height:1.55;font-weight:700}
+/* contact */
+.contact{max-width:none;padding-top:6rem;padding-bottom:6rem;border-top:1px solid var(--line);background:radial-gradient(circle at 79% 20%,rgba(184,255,72,.09),transparent 22%)}
+.contact h2{margin:.5rem 0 1.35rem;font-size:clamp(2.7rem,4.8vw,5.3rem)}
+.contact>p:not(.eyebrow){max-width:410px;color:var(--muted);font-size:.88rem;line-height:1.65}
+.contact .button{margin-top:.8rem}
+.github-link{display:block;width:max-content;margin-top:1.4rem;color:var(--muted);font:500 .62rem var(--mono);border-bottom:1px solid var(--line);padding-bottom:.25rem;letter-spacing:.04em}
+.github-link b{color:var(--acid);margin-left:.35rem}
+/* footer */
+footer{max-width:1440px;min-height:85px;margin:auto;padding:1.5rem clamp(1.3rem,5vw,5.4rem);display:flex;align-items:center;justify-content:space-between;gap:1rem;color:var(--muted);font:500 .56rem var(--mono);border-top:1px solid var(--line)}
+footer p{margin:0}
+/* ---------- hero portrait ---------- */
+.hero-portrait{align-self:stretch;min-height:560px;position:relative;overflow:hidden;border:1px solid var(--line);background:linear-gradient(145deg,#14282c,#0c1319)}
+.hero-portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,13,17,.62),transparent 48%);pointer-events:none}
+.hero-portrait img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);opacity:.88;display:block}
+.portrait-grid{position:absolute;z-index:1;inset:0;background-image:linear-gradient(rgba(184,255,72,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(184,255,72,.11) 1px,transparent 1px);background-size:32px 32px;mix-blend-mode:screen;pointer-events:none}
+.portrait-label{position:absolute;z-index:2;top:1rem;left:1rem;right:1rem;display:flex;justify-content:space-between;color:#e7f4ed;font:500 .53rem var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.portrait-mark{position:absolute;z-index:2;left:1.2rem;bottom:1.15rem;display:flex;flex-direction:column;gap:.2rem}
+.portrait-mark span{font:800 3.2rem/.83 var(--sans);color:var(--acid);letter-spacing:-.12em}
+.portrait-mark small{color:#d9e6df;font:500 .54rem var(--mono);letter-spacing:.07em;text-transform:uppercase}
+.hero-copy .signal-panel{margin-top:2rem}
+/* ---------- contact extras ---------- */
+.contact-loc{margin:1.6rem 0 0;color:var(--muted);font:500 .62rem var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.copy-btn{background:none;border:0;border-bottom:1px solid transparent;color:var(--acid);font:700 .62rem var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-left:.9rem;padding:.2rem 0}
+.copy-btn:hover{border-bottom-color:var(--acid)}
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+/* responsive */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:3rem}
+  .hero-portrait{height:420px;min-height:0;align-self:auto}
+  .project-main,.about{grid-template-columns:1fr}
+  .charts{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .clean-stats{grid-template-columns:repeat(3,1fr)}
+  .project-facts{grid-template-columns:1fr 1fr}
+  .project-facts>div:nth-child(2){border-right:0}
+  .project-facts>div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .exp-grid{grid-template-columns:1fr}
+  .section-head{flex-direction:column;align-items:start;gap:1.2rem}
+}
+@media(max-width:600px){
+  .header{height:68px;gap:1rem}
+  .nav-links{gap:1rem}
+  .nav-links a{font-size:.62rem}
+  #resumeBtn{display:none}
+  .hero{min-height:0;padding-top:3.5rem;padding-bottom:3.5rem}
+  .hero-portrait{height:340px}
+  .work{padding-top:5.7rem}
+  .band{padding-top:2rem;padding-bottom:5.7rem}
+  .project-top{font-size:.48rem}
+  .project-main{padding:1.3rem}
+  .demo-wrap,.notes-wrap,.project-video{padding-left:1.3rem;padding-right:1.3rem}
+  .project-facts{grid-template-columns:1fr}
+  .project-facts>div{border-right:0;border-bottom:1px solid var(--line)}
+  .project-facts>div:last-child{border-bottom:0}
+  .kpis{grid-template-columns:1fr 1fr}
+  .clean-stats{grid-template-columns:1fr 1fr}
+  .about{padding-bottom:5.7rem;gap:2.5rem}
+  .about-details{flex-direction:column;gap:1.6rem}
+  .contact{padding-top:5rem;padding-bottom:5rem}
+  .identity-strip{height:44px}
+  footer{flex-wrap:wrap;align-content:center}
+  footer p{order:3;flex-basis:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .identity-strip div{animation:none}
+  .button:hover{transform:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  .dist-fill{transition:none}
+  .spinner{animation:none}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="tip" id="tip" role="status"></div>
+<header class="header">
+  <a class="wordmark" href="#top">SAMI<span>_</span></a>
+  <nav class="nav-links" aria-label="Main navigation">
+    <a href="#work" data-nav>Work</a>
+    <a href="#demos" data-nav>Demos</a>
+    <a href="#about" data-nav>About</a>
+    <a href="#contact" data-nav>Contact</a>
+  </nav>
+  <a class="button button-sm" id="resumeBtn" href="#" target="_blank" rel="noopener">Resume <b>↗</b></a>
+</header>
+<main id="main">
+<!-- HERO -->
+<section class="hero shell" id="top">
+  <div class="reveal hero-portrait">
+    <img src="assets/profile.png" alt="Portrait of Muhammad Sami Ullah">
+    <div class="portrait-grid" aria-hidden="true"></div>
+    <div class="portrait-label"><span>Profile / 01</span><span>Muhammad Sami Ullah</span></div>
+    <div class="portrait-mark"><span>MSU</span><small>Data × Business Analytics</small></div>
+  </div>
+  <div class="reveal hero-copy">
+    <p class="eyebrow"><span></span>Business Data Analyst</p>
+    <h1>Muhammad<br><em>Sami Ullah.</em></h1>
+    <p class="hero-profession">I build analytical tools, dashboards and data-driven experiences you can actually try.</p>
+    <p class="hero-intro">Business data analyst working between analytics, AI and digital product design — this portfolio is a live demonstration, not a brochure.</p>
+    <div class="hero-actions" id="heroActions">
+      <a class="button" href="#demos">Explore the demos <b>↓</b></a>
+      <a class="link" id="heroFloodBtn" href="https://muhammadsamiullah1097-rgb.github.io/PakistanFloodPredictionTool/" target="_blank" rel="noopener">View live project <b>↗</b></a>
+    </div>
+    <div class="signal-panel" aria-label="Interactive demo: live data panel">
+      <div class="signal-panel-head"><span>Live data / sample</span><span class="status"><i></i>Interactive</span></div>
+      <div class="metric-tabs" role="group" aria-label="Metric selector">
+        <button data-metric="revenue" aria-pressed="true">Revenue</button>
+        <button data-metric="orders" aria-pressed="false">Orders</button>
+        <button data-metric="growth" aria-pressed="false">Growth</button>
+      </div>
+      <div class="signal-score">
+        <div class="dial" id="heroDial" style="--dial:100" role="img" aria-label="Sample metric index dial"><div><small id="heroDialLabel">Revenue</small><strong id="heroDialVal">—</strong><span>index</span></div></div>
+        <div><p id="heroDelta">—</p><small>Index vs series peak · switches with the metric tabs</small></div>
+      </div>
+      <div class="signal-bars" id="heroBars"></div>
+      <p class="signal-note">Interactive demo · sample data — figures are illustrative, not business results.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTITY STRIP -->
+<div class="identity-strip" aria-hidden="true"><div><span>Python ·</span><span>SQL ·</span><span>Data Visualization ·</span><span>Tableau ·</span><span>Power BI ·</span><span>Excel ·</span><span>Statistical Analysis ·</span><span>Database Management ·</span><span>Python ·</span><span>SQL ·</span><span>Data Visualization ·</span><span>Tableau ·</span><span>Power BI ·</span><span>Excel ·</span><span>Statistical Analysis ·</span><span>Database Management ·</span><span>Python ·</span><span>SQL ·</span><span>Data Visualization ·</span><span>Tableau ·</span><span>Power BI ·</span><span>Excel ·</span><span>Statistical Analysis ·</span><span>Database Management ·</span><span>Python ·</span><span>SQL ·</span><span>Data Visualization ·</span><span>Tableau ·</span><span>Power BI ·</span><span>Excel ·</span><span>Statistical Analysis ·</span><span>Database Management ·</span></div></div>
+
+<!-- WORK -->
+<section class="work shell" id="work">
+  <div class="section-head reveal">
+    <div>
+      <p class="eyebrow"><span></span>Selected work</p>
+      <h2>Don't just read.<br><em>Interact.</em></h2>
+    </div>
+    <p>Every project below is something you can try right here — the portfolio itself is the demonstration.</p>
+  </div>
+
+  <!-- 01 REAL PROJECT -->
+  <article class="project reveal" id="proj-flood">
+    <div class="project-top"><span>01 / Real project</span><span>● Live — deployed</span></div>
+    <div class="project-main">
+      <div class="project-intro">
+        <p class="project-type">Decision-support tool</p>
+        <h3>Pakistan Flood Prediction System.</h3>
+        <p>A transparent flood-risk system for Pakistan that brings rainfall, river conditions, soil saturation, seasonality and verified alerts into one explainable regional assessment. Built end-to-end: data ingestion, risk scoring, reporting, and a hosted interactive dashboard.</p>
+        <div class="project-actions">
+          <a class="button" href="https://muhammadsamiullah1097-rgb.github.io/PakistanFloodPredictionTool/" target="_blank" rel="noopener">Open live dashboard <b>↗</b></a>
+          <a class="link" href="https://github.com/muhammadsamiullah1097-rgb/PakistanFloodPredictionTool" target="_blank" rel="noopener">GitHub repo <b>↗</b></a>
+        </div>
+      </div>
+      <div class="signal-panel">
+        <div class="signal-panel-head"><span>Flood / signal</span><span>Scenario view</span></div>
+        <div class="signal-location"><div><small>Selected region</small><strong>Multan, Punjab</strong></div><span class="status"><i></i>Explainable</span></div>
+        <div class="signal-score">
+          <div class="dial" style="--dial:58" role="img" aria-label="Sample risk score 58 of 100"><div><small>Risk score</small><strong>58</strong><span>/100</span></div></div>
+          <div><p>Moderate scenario</p><small>Illustrative input · next 1–7 days</small></div>
+        </div>
+        <div class="signal-bars">
+          <div><span>Rainfall</span><i style="--value:72%"></i><b>110 mm</b></div>
+          <div><span>River flow</span><i style="--value:48%"></i><b>0.72×</b></div>
+          <div><span>Soil wetness</span><i style="--value:62%"></i><b>62%</b></div>
+        </div>
+        <p class="signal-note">Interactive demo · sample data — the live system reads verified sources (Open-Meteo, GloFAS, NASA POWER, GDACS, PMD); this panel only demonstrates the interface language.</p>
+      </div>
+    </div>
+    <div class="project-video">
+      <div class="video-card">
+        <div class="video-empty" id="video-empty">
+          <div class="play">▶</div>
+          <strong>Your flood-prediction demo</strong>
+          <p>Paste a YouTube link below to load a video preview.</p>
+        </div>
+        <iframe id="video-frame" title="Project demo video" hidden allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <form id="video-form">
+          <label for="video-url">YouTube demo URL</label>
+          <div><input id="video-url" type="url" placeholder="https://www.youtube.com/watch?v=…" autocomplete="off"><button type="submit">Preview</button></div>
+          <p id="video-message">This preview does not save the link; add it to <code>demoVideoUrl</code> in siteConfig when you are ready to publish.</p>
+        </form>
+      </div>
+    </div>
+    <div class="project-facts">
+      <div><span>Problem</span><p>Flood-risk information in Pakistan is scattered — forecasts, river discharge, soil moisture and official advisories live in separate places, and raw numbers don't tell a district officer what to do next.</p></div>
+      <div><span>Pipeline</span><p>Live ingestion from Open-Meteo (forecast + archive), Open-Meteo Flood/GloFAS discharge, NASA POWER soil moisture, GDACS events and ReliefWeb — plus a PMD advisory client (weather.gov.pk) with an NLP analyzer. 78 cities/districts in a Pakistan gazetteer.</p></div>
+      <div><span>Intelligence</span><p>River-specific ML model where suitable history exists, inspectable rule-based fallback otherwise. Every assessment ships an explainable reasoning trace — likely causes, warning window, damage-risk context — in JSON and Markdown.</p></div>
+      <div><span>Live system</span><p>Deployed on GitHub Pages: national risk reports plus an interactive dashboard with a Scenario Lab (rainfall/soil/river/seasonality sliders, instant recalculation, JSON export) and a live Open-Meteo rain feed.</p></div>
+    </div>
+  </article>
+
+  <span id="demos" style="display:block;position:relative;top:-96px" aria-hidden="true"></span>
+  <!-- 02 SALES DASHBOARD -->
+  <article class="project reveal" id="proj-sales">
+    <div class="project-top"><span>02 / Interactive dashboard</span><span>◈ Demo · sample data</span></div>
+    <div class="project-main single">
+      <div class="project-intro">
+        <p class="project-type">Business intelligence · demo</p>
+        <h3>Sales Intelligence Lab.</h3>
+        <p>Change the year or region and watch every KPI and chart recompute from one deterministic dataset. Hover any point for exact values.</p>
+        <p><span class="demo-badge">Interactive demo · sample data</span></p>
+      </div>
+    </div>
+    <div class="demo-wrap">
+      <div class="console">
+        <div class="console-head"><span>Sales / dashboard</span><span class="status"><i></i>Live filters</span></div>
+        <div class="dash-controls">
+          <div class="ctl"><label>Year</label><div class="seg" role="group" aria-label="Year filter" id="yearSeg">
+            <button data-year="2024" aria-pressed="false">2024</button>
+            <button data-year="2025" aria-pressed="false">2025</button>
+            <button data-year="2026" aria-pressed="true">2026</button>
+          </div></div>
+          <div class="ctl"><label for="regionSel">Region</label>
+            <select id="regionSel">
+              <option value="all">All Regions</option><option value="Pakistan">Pakistan</option><option value="UAE">UAE</option><option value="UK">UK</option><option value="USA">USA</option>
+            </select>
+          </div>
+        </div>
+        <div class="kpis" id="dashKpis"></div>
+        <div class="charts">
+          <div class="chart-card"><h4>Monthly revenue ($K)</h4><svg class="chart" id="revChart" viewBox="0 0 520 220" role="img" aria-label="Monthly revenue line chart"></svg></div>
+          <div class="chart-card"><h4>Revenue by region ($K)</h4><svg class="chart" id="regChart" viewBox="0 0 320 220" role="img" aria-label="Revenue by region bar chart"></svg></div>
+        </div>
+      </div>
+    </div>
+    <div class="notes-wrap">
+      <button class="notes-btn" aria-expanded="false" data-notes="notes-sales">Open case notes <span class="chev">▾</span></button>
+      <div class="notes-panel" id="notes-sales"><p>This demo shows how I think about BI builds: one deterministic dataset, filterable views, and every number on screen recomputed from the same source of truth — the same discipline a real Power BI model needs. Figures here are illustrative sample data, not business results.</p></div>
+    </div>
+  </article>
+
+  <!-- 03 NLP LAB -->
+  <article class="project reveal" id="proj-nlp">
+    <div class="project-top"><span>03 / Interactive tool</span><span>◈ Demo · sample lexicon</span></div>
+    <div class="project-main single">
+      <div class="project-intro">
+        <p class="project-type">Natural language processing · demo</p>
+        <h3>NLP Sentiment Lab.</h3>
+        <p>Paste any text and get an instant sentiment breakdown — computed entirely in your browser.</p>
+        <p><span class="demo-badge">Runs fully in your browser · sample lexicon</span></p>
+      </div>
+    </div>
+    <div class="demo-wrap">
+      <div class="term">
+        <div class="term-bar"><span class="dots"><i></i><i></i><i></i></span><span>sentiment-lab — interactive</span></div>
+        <div class="term-body">
+          <label class="lbl" for="nlpInput">Input text</label>
+          <textarea id="nlpInput">The dashboard is excellent and the insights are incredibly useful.</textarea>
+          <div class="term-actions">
+            <button class="button button-sm" id="nlpRun">Analyze <b>→</b></button>
+            <button class="link" id="nlpSample">Try a sample <b>↗</b></button>
+          </div>
+          <div class="form-err" id="nlpErr">Please enter some text first.</div>
+          <div class="nlp-out" id="nlpOut" aria-live="polite">
+            <span class="lbl">Sentiment</span>
+            <div class="nlp-score" id="nlpScore">—</div>
+            <div style="font:400 .72rem var(--mono);color:var(--muted)">Confidence <strong id="nlpConf" style="color:var(--text)">—</strong></div>
+            <div class="dist" id="nlpDist"></div>
+            <span class="lbl">Keywords</span>
+            <div class="kw" id="nlpKw"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes-wrap">
+      <button class="notes-btn" aria-expanded="false" data-notes="notes-nlp">Open case notes <span class="chev">▾</span></button>
+      <div class="notes-panel" id="notes-nlp"><p>A lexicon-based sentiment classifier built from scratch in vanilla JS: tokenize, match against curated positive/negative word lists, score, and explain with keywords. The real lesson — honest labeling: it calls itself a sample lexicon, not an ML model.</p></div>
+    </div>
+  </article>
+
+  <!-- 04 SQL EXPLORER -->
+  <article class="project reveal" id="proj-sql">
+    <div class="project-top"><span>04 / Console</span><span>◈ Demo · sample data</span></div>
+    <div class="project-main single">
+      <div class="project-intro">
+        <p class="project-type">SQL · data exploration · demo</p>
+        <h3>SQL Explorer.</h3>
+        <p>Pick a preset query, read the SQL, run it, and inspect the result set — a simulated query console.</p>
+        <p><span class="demo-badge">Interactive demo · sample data</span></p>
+      </div>
+    </div>
+    <div class="demo-wrap">
+      <div class="term">
+        <div class="term-bar"><span class="dots"><i></i><i></i><i></i></span><span>sql-explorer — ecommerce_sales</span></div>
+        <div class="term-body">
+          <div class="qchips" role="group" aria-label="Preset queries" id="qchips"></div>
+          <pre class="sql" id="sqlCode" aria-label="Current SQL query"></pre>
+          <button class="button button-sm" id="sqlRun">Run query <b>→</b></button>
+          <div id="sqlResult" style="margin-top:1rem"></div>
+          <div class="exec-note" id="sqlNote"></div>
+        </div>
+      </div>
+    </div>
+    <div class="notes-wrap">
+      <button class="notes-btn" aria-expanded="false" data-notes="notes-sql">Open case notes <span class="chev">▾</span></button>
+      <div class="notes-panel" id="notes-sql"><p>Demonstrates the core SQL patterns behind most business questions — aggregation, grouping, window-style ordering — with results precomputed deterministically from a fixed sample dataset, presented honestly as a simulation.</p></div>
+    </div>
+  </article>
+
+  <!-- 05 CLEANING LAB -->
+  <article class="project reveal" id="proj-clean">
+    <div class="project-top"><span>05 / Before–after</span><span>◈ Demo · sample data</span></div>
+    <div class="project-main single">
+      <div class="project-intro">
+        <p class="project-type">Data quality · Python-style workflow · demo</p>
+        <h3>Data Cleaning Lab.</h3>
+        <p>Watch a messy dataset get fixed: missing values handled, duplicates removed, quality score recomputed. Toggle between before and after.</p>
+        <p><span class="demo-badge">Interactive demo · sample data</span></p>
+      </div>
+    </div>
+    <div class="demo-wrap">
+      <div class="console">
+        <div class="console-head"><span>Data quality / audit</span><span class="status"><i></i>Deterministic</span></div>
+        <div class="clean-stats" id="cleanStats"></div>
+        <div class="clean-actions">
+          <button class="button button-sm" id="cleanBtn">Clean data <b>→</b></button>
+          <div class="ba-toggle" role="group" aria-label="Before after toggle">
+            <button id="baBefore" aria-pressed="true">Before</button>
+            <button id="baAfter" aria-pressed="false" disabled>After</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto"><table class="data" id="cleanTable" aria-label="Sample dataset rows"></table></div>
+      </div>
+    </div>
+    <div class="notes-wrap">
+      <button class="notes-btn" aria-expanded="false" data-notes="notes-clean">Open case notes <span class="chev">▾</span></button>
+      <div class="notes-panel" id="notes-clean"><p>The unglamorous 80% of analytics work: auditing a dataset, quantifying its problems, and showing the fix with verifiable before/after states. Deterministic numbers, no sleight of hand.</p></div>
+    </div>
+  </article>
+
+  <!-- 06 ACADEMIC PROJECT -->
+  <article class="project reveal" id="proj-acad-data">
+    <div class="project-top"><span>06 / Academic project</span><span>COMSATS · Apr–May 2026</span></div>
+    <div class="project-main single">
+      <div class="project-intro">
+        <p class="project-type">Data analysis · Python · Tableau · SQL</p>
+        <h3>End-to-End Data Analysis Project.</h3>
+        <p>Faculty-recognized academic project: a complete analysis workflow on real-world datasets — Python for the analysis, Tableau for interactive KPI dashboards, advanced SQL for extraction and transformation.</p>
+      </div>
+    </div>
+    <div class="project-facts">
+      <div><span>Problem</span><p>Business trends hidden inside raw, real-world datasets — stakeholders couldn't see what the data was saying.</p></div>
+      <div><span>Approach</span><p>End-to-end pipeline in Python (Pandas, NumPy, Matplotlib): cleaning, exploration, regression and correlation studies, then Tableau KPI dashboards for presentation.</p></div>
+      <div><span>Tools</span><p>Python · Pandas · NumPy · Matplotlib · Tableau · SQL</p></div>
+      <div><span>Outcome</span><p>Recognized by faculty for thoroughness and innovation; the dashboards improved stakeholder comprehension of complex trends by 70%.</p></div>
+    </div>
+  </article>
+
+  <!-- 07 ACADEMIC PROJECT -->
+  <article class="project reveal" id="proj-acad-db">
+    <div class="project-top"><span>07 / Academic project</span><span>COMSATS · Oct–Nov 2024</span></div>
+    <div class="project-main single">
+      <div class="project-intro">
+        <p class="project-type">Database design · MySQL</p>
+        <h3>NGO Operations Database.</h3>
+        <p>A normalized relational database for a simulated NGO operations management system — designed for integrity and scale, delivered with a professional technical report.</p>
+      </div>
+    </div>
+    <div class="project-facts">
+      <div><span>Problem</span><p>An NGO-style operation needed structured, reliable data management instead of scattered records.</p></div>
+      <div><span>Approach</span><p>Architected a normalized schema with ER diagrams and documented design rationale; integrity enforced at the database level.</p></div>
+      <div><span>Tools</span><p>MySQL · ER modeling · Stored procedures · Triggers</p></div>
+      <div><span>Outcome</span><p>Full CRUD operations, stored procedures, triggers and constraints — a highly efficient, reliable data model plus a review-ready technical report.</p></div>
+    </div>
+  </article>
+</section>
+<!-- CAPABILITIES -->
+<section class="band shell" id="capabilities">
+  <p class="eyebrow reveal"><span></span>Capabilities</p>
+  <h2 class="reveal">Skills, backed by <em>evidence.</em></h2>
+  <p class="sub reveal">Click a skill to see exactly which projects demonstrate it.</p>
+  <div class="cap-chips reveal" id="capChips" role="group" aria-label="Skill filter"></div>
+  <p class="cap-hint reveal" id="capHint"></p>
+</section>
+
+<!-- EXPERIENCE / EDUCATION -->
+<section class="band shell" id="experience" style="padding-top:0">
+  <p class="eyebrow reveal"><span></span>Background</p>
+  <h2 class="reveal">Experience &amp; <em>education.</em></h2>
+  <div class="exp-grid">
+    <div class="exp-card reveal">
+      <span>Education</span>
+      <strong>BS Business Data Analysis</strong>
+      <p class="org">COMSATS University Islamabad</p>
+      <p>Analytics, business intelligence and data-driven decision making.</p>
+      <small>Sep 2024 — Present</small>
+    </div>
+    <div class="exp-card reveal">
+      <span>Education</span>
+      <strong>Intermediate — FSc</strong>
+      <p>Completed prior to starting the BS program.</p>
+      <small>Aug 2021 — May 2023</small>
+    </div>
+    <div class="exp-card reveal">
+      <span>Community experience</span>
+      <strong>Community Volunteer</strong>
+      <p class="org">University Social Welfare Committee, Islamabad</p>
+      <p>Food drives, public awareness campaigns and outreach — plus data collection and reporting support for impact assessment, alongside a 20+ volunteer team.</p>
+      <small>Apr 2026 — Present</small>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about shell" id="about">
+  <div class="about-stamp reveal"><span>MSU</span><p>DATA / BUSINESS<br>/ CURIOSITY</p></div>
+  <div class="reveal">
+    <p class="eyebrow"><span></span>About me</p>
+    <h2>I'm interested in the <em>why</em> behind the data.</h2>
+    <p>I'm <strong>Muhammad Sami Ullah</strong>, a Business Data Analysis student at COMSATS University Islamabad. I work with Python, SQL and visualization tools — Tableau, Power BI, Excel — to turn raw datasets into insights people can act on, through statistical analysis and interactive dashboards.</p>
+    <p style="margin-top:1rem">I want to contribute data-driven solutions to organizations that care about <strong>evidence-based decisions</strong>. I'm a strong communicator, I do my best work in collaborative teams, and I care about technology with real social impact.</p>
+    <div class="about-details">
+      <div><span>Focus</span><strong>Python · SQL<br>Tableau · Power BI · Excel</strong></div>
+      <div><span>Education</span><strong>BS Business Data Analysis<br>COMSATS Islamabad</strong></div>
+      <div><span>Certifications</span><strong>Python for Data Science &amp; AI (IBM)<br>Google Data Analytics · Tableau Specialist<br><span style="color:var(--muted)">— all in progress</span></strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact shell" id="contact">
+  <p class="eyebrow reveal"><span></span>Contact</p>
+  <h2 class="reveal">Let's build<br>something <em>useful.</em></h2>
+  <p class="reveal">Have a project, opportunity, or question? Email or call me directly and I'll get back to you.</p>
+  <div class="reveal" style="margin-top:.8rem">
+    <a class="button" id="contactEmail" href="#">muhammadsamiullah1097@gmail.com <b>↗</b></a><button class="copy-btn" id="copyEmail" type="button">Copy email</button>
+  </div>
+  <a class="github-link reveal" id="contactPhone" href="#">+92 332 1983086</a>
+  <a class="github-link reveal" id="contactGithub" href="#" target="_blank" rel="noopener">GitHub profile <b>↗</b></a>
+  <a class="github-link reveal" id="contactLinkedin" href="#" target="_blank" rel="noopener">LinkedIn <b>↗</b></a>
+  <p class="contact-loc reveal">Islamabad, Pakistan</p>
+</section>
+</main>
+
+<footer>
+  <a class="wordmark" href="#top">SAMI<span>_</span></a>
+  <p>Building useful things with data, technology &amp; curiosity.</p>
+  <p>© <span id="year">2026</span> Muhammad Sami Ullah</p>
+</footer>
+<script>
+"use strict";
+/* ============================================================
+   siteConfig — EDIT ME: the single source of truth for personal
+   links. Leave resumeUrl / linkedin / demoVideoUrl empty ("")
+   to hide them.
+   ============================================================ */
+const siteConfig = {
+  "name": "Muhammad Sami Ullah",
+  "title": "Business Data Analytics",
+  "email": "muhammadsamiullah1097@gmail.com",
+  "phone": "+92 332 1983086",
+  "location": "Islamabad, Pakistan",
+  "github": "https://github.com/muhammadsamiullah1097-rgb",
+  "linkedin": "",
+  "resumeUrl": "assets/Muhammad-Sami-Ullah-CV.pdf",
+  "demoVideoUrl": "",
+  "floodDashboard": "https://muhammadsamiullah1097-rgb.github.io/PakistanFloodPredictionTool/",
+  "floodRepo": "https://github.com/muhammadsamiullah1097-rgb/PakistanFloodPredictionTool"
+};
+
+const $ = function(s){ return document.querySelector(s); };
+const $$ = function(s){ return Array.from(document.querySelectorAll(s)); };
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+/* ---------- Wire siteConfig ---------- */
+(function wireConfig(){
+  const mailto = "mailto:" + siteConfig.email;
+  const ce = $("#contactEmail");
+  ce.href = mailto;
+  ce.innerHTML = siteConfig.email + ' <b>↗</b>';
+  $("#contactGithub").href = siteConfig.github;
+  const li = $("#contactLinkedin");
+  if (siteConfig.linkedin) { li.href = siteConfig.linkedin; } else { li.style.display = "none"; }
+  const cp = $("#contactPhone");
+  cp.href = "tel:" + siteConfig.phone.replace(/[^+\d]/g, "");
+  cp.textContent = siteConfig.phone;
+  const rb = $("#resumeBtn");
+  if (siteConfig.resumeUrl) {
+    rb.href = siteConfig.resumeUrl;
+    const hb = document.createElement("a");
+    hb.className = "link"; hb.href = siteConfig.resumeUrl;
+    hb.target = "_blank"; hb.rel = "noopener";
+    hb.innerHTML = 'Download resume <b>↗</b>';
+    $("#heroActions").appendChild(hb);
+  } else { rb.style.display = "none"; }
+  $("#year").textContent = new Date().getFullYear();
+})();
+
+/* ---------- Copy email microinteraction ---------- */
+(function(){
+  const btn = document.querySelector("#copyEmail");
+  if(!btn) return;
+  const done = function(){ btn.textContent = "Copied ✓"; setTimeout(function(){ btn.textContent = "Copy email"; }, 1800); };
+  const fallback = function(){
+    const t = document.createElement("textarea");
+    t.value = siteConfig.email; document.body.appendChild(t); t.select();
+    try{ document.execCommand("copy"); }catch(e){}
+    document.body.removeChild(t); done();
+  };
+  btn.addEventListener("click", function(){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(siteConfig.email).then(done, fallback);
+    } else { fallback(); }
+  });
+})();
+
+/* ---------- Tooltip ---------- */
+const tip = $("#tip");
+function showTip(evt, text){
+  tip.textContent = text; tip.style.opacity = "1";
+  const x = (evt.clientX !== undefined ? evt.clientX : (evt.touches ? evt.touches[0].clientX : 100)) + 14;
+  const y = (evt.clientY !== undefined ? evt.clientY : (evt.touches ? evt.touches[0].clientY : 100)) + 14;
+  tip.style.left = Math.min(x, window.innerWidth - 150) + "px";
+  tip.style.top = Math.min(y, window.innerHeight - 50) + "px";
+}
+function hideTip(){ tip.style.opacity = "0"; }
+function bindTips(sel){
+  $$(sel).forEach(function(el){
+    el.addEventListener("mouseenter", function(e){ showTip(e, el.dataset.t); });
+    el.addEventListener("mousemove", function(e){ showTip(e, el.dataset.t); });
+    el.addEventListener("mouseleave", hideTip);
+    el.addEventListener("focus", function(e){ showTip(e, el.dataset.t); });
+    el.addEventListener("blur", hideTip);
+  });
+}
+
+/* ============================================================
+   HERO — live data panel (sample data), dial + bars
+   ============================================================ */
+const heroSeries = {
+  revenue: { values:[42,55,48,63,71,66,80,88,84,96,104,112], fmt:function(v){return "$"+v+"K";}, delta:"+18.4% vs last period", label:"Revenue" },
+  orders:  { values:[310,402,355,468,521,489,588,642,610,702,768,815], fmt:function(v){return v.toLocaleString("en-US");}, delta:"+12.1% vs last period", label:"Orders" },
+  growth:  { values:[4,6,3,8,11,9,13,15,12,17,19,22], fmt:function(v){return v+"%";}, delta:"accelerating trend", label:"Growth" }
+};
+let heroMetric = "revenue";
+function renderHero(){
+  const s = heroSeries[heroMetric], vals = s.values;
+  const max = Math.max.apply(null, vals), last = vals[vals.length-1];
+  const pct = Math.max(4, Math.round(last/max*100));
+  const dial = $("#heroDial");
+  dial.style.setProperty("--dial", pct);
+  dial.setAttribute("aria-label", s.label + " sample index: " + pct + " of series peak");
+  $("#heroDialVal").textContent = s.fmt(last);
+  $("#heroDialLabel").textContent = s.label;
+  $("#heroDelta").textContent = s.delta;
+  const ranked = vals.map(function(v,i){ return {v:v,i:i}; }).sort(function(a,b){ return b.v-a.v; }).slice(0,4);
+  $("#heroBars").innerHTML = ranked.map(function(t){
+    const p = Math.max(3, Math.round(t.v/max*100));
+    return '<div><span>'+MONTHS[t.i]+'</span><i tabindex="0" role="img" aria-label="'+MONTHS[t.i]+": "+s.fmt(t.v)+'" data-t="'+MONTHS[t.i]+" · "+s.fmt(t.v)+'" style="--value:'+p+'%"></i><b>'+s.fmt(t.v)+'</b></div>';
+  }).join("");
+  bindTips("#heroBars i");
+}
+function selectHeroMetric(m, btn){
+  heroMetric = m;
+  $$(".metric-tabs button").forEach(function(b){ b.setAttribute("aria-pressed", b===btn ? "true" : "false"); });
+  renderHero();
+}
+$$(".metric-tabs button").forEach(function(b){ b.addEventListener("click", function(){ selectHeroMetric(b.dataset.metric, b); }); });
+renderHero();
+/* ============================================================
+   02 — SALES INTELLIGENCE LAB (deterministic sample data)
+   ============================================================ */
+const salesByYear = {
+  2024:[82,88,95,91,104,112,108,119,125,131,142,156],
+  2025:[95,99,108,104,118,126,121,134,141,149,162,178],
+  2026:[108,114,122,118,133,142,138,151,159,168,183,201]
+};
+const regionShare = { Pakistan:0.46, UAE:0.24, UK:0.17, USA:0.13 };
+let dashYear = 2026, dashRegion = "all";
+function fmtK(v){ return "$"+Math.round(v)+"K"; }
+function scaledMonthly(){
+  const base = salesByYear[dashYear];
+  const f = dashRegion==="all" ? 1 : regionShare[dashRegion];
+  return base.map(function(v){ return v*f; });
+}
+function kpiCard(l,v,s){ return '<div class="kpi"><div class="k-label">'+l+'</div><div class="k-value">'+v+'</div><div class="k-sub">'+s+'</div></div>'; }
+function renderDash(){
+  const m = scaledMonthly();
+  const total = m.reduce(function(a,b){ return a+b; }, 0);
+  const orders = Math.round(total*6.8);
+  const aov = (total*1000/orders).toFixed(0);
+  const prev = dashRegion==="all" ? 1 : regionShare[dashRegion];
+  const prevTotal = salesByYear[dashYear-1] ? salesByYear[dashYear-1].reduce(function(a,b){ return a+b; },0)*prev : null;
+  const growth = prevTotal ? (((total-prevTotal)/prevTotal)*100).toFixed(1)+"% YoY" : "—";
+  $("#dashKpis").innerHTML =
+    kpiCard("REVENUE", fmtK(total), growth) +
+    kpiCard("ORDERS", orders.toLocaleString("en-US"), "across "+MONTHS.length+" months") +
+    kpiCard("AVG ORDER VALUE", "$"+aov, dashRegion==="all"?"all regions":dashRegion) +
+    kpiCard("GROWTH", growth, dashYear+" vs "+(dashYear-1));
+  drawLineChart(m);
+  drawBarChart(total);
+}
+function drawLineChart(m){
+  const W=520,H=220,P=36, max=Math.max.apply(null,m)*1.15, min=Math.min.apply(null,m)*0.6;
+  const X=function(i){ return P+(i/(m.length-1))*(W-2*P); };
+  const Y=function(v){ return H-P-((v-min)/(max-min))*(H-2*P); };
+  const pts=m.map(function(v,i){ return X(i).toFixed(1)+","+Y(v).toFixed(1); }).join(" ");
+  let grid="";
+  for(let g=0;g<=4;g++){ const y=P+g*(H-2*P)/4; grid+='<line x1="'+P+'" x2="'+(W-P)+'" y1="'+y+'" y2="'+y+'" stroke="rgba(232,246,244,.07)"/>'; }
+  const labels=MONTHS.map(function(mo,i){ return '<text x="'+X(i).toFixed(1)+'" y="'+(H-8)+'" fill="#9cafae" font-size="10" text-anchor="middle" font-family="DM Mono,monospace">'+mo+'</text>'; }).join("");
+  const dots=m.map(function(v,i){ return '<circle class="point" tabindex="0" role="img" aria-label="'+MONTHS[i]+": "+fmtK(v)+'" cx="'+X(i).toFixed(1)+'" cy="'+Y(v).toFixed(1)+'" r="5" fill="#b8ff48" stroke="#080d11" stroke-width="2" data-t="'+MONTHS[i]+" · "+fmtK(v)+'"/>'; }).join("");
+  $("#revChart").innerHTML = grid
+    + '<polyline points="'+pts+'" fill="none" stroke="#b8ff48" stroke-width="2.5" stroke-linecap="round"/>'
+    + dots + labels;
+  bindTips("#revChart .point");
+}
+function drawBarChart(total){
+  const regions = Object.keys(regionShare);
+  const W=320,H=220, barH=26, gap=18, top=14;
+  const maxV = total*regionShare.Pakistan*1.15;
+  const rows = regions.map(function(r,i){
+    const v = total*regionShare[r], w = (v/maxV)*(W-140);
+    const y = top + i*(barH+gap);
+    return '<text x="0" y="'+(y+17)+'" fill="#9cafae" font-size="12" font-family="DM Mono,monospace">'+r+'</text>'
+      +'<rect class="bar-rect" tabindex="0" role="img" aria-label="'+r+": "+fmtK(v)+'" x="86" y="'+y+'" width="'+w.toFixed(1)+'" height="'+barH+'" rx="4" fill="'+(dashRegion===r?"#b8ff48":"rgba(184,255,72,.45)")+'" data-t="'+r+" · "+fmtK(v)+'"/>'
+      +'<text x="'+(86+w+8)+'" y="'+(y+17)+'" fill="#eef7f4" font-size="12" font-family="DM Mono,monospace">'+fmtK(v)+'</text>';
+  }).join("");
+  $("#regChart").innerHTML = rows;
+  bindTips("#regChart .bar-rect");
+}
+$("#yearSeg").addEventListener("click", function(e){
+  const b = e.target.closest("button"); if(!b) return;
+  dashYear = parseInt(b.dataset.year,10);
+  $$("#yearSeg button").forEach(function(x){ x.setAttribute("aria-pressed", x===b?"true":"false"); });
+  renderDash();
+});
+$("#regionSel").addEventListener("change", function(e){ dashRegion = e.target.value; renderDash(); });
+renderDash();
+
+/* ============================================================
+   03 — NLP SENTIMENT LAB (deterministic lexicon)
+   ============================================================ */
+const POS_WORDS = ["excellent","great","amazing","love","loved","wonderful","fantastic","good","best","awesome","incredible","useful","helpful","fast","smooth","easy","clear","powerful","impressive","enjoyed","enjoy","brilliant","outstanding","perfect","reliable","intuitive","smart","beautiful","strong","recommend"];
+const NEG_WORDS = ["terrible","bad","awful","hate","hated","horrible","worst","poor","slow","broken","buggy","confusing","difficult","hard","disappointing","disappointed","useless","weak","ugly","annoying","frustrating","frustrated","messy","inaccurate","wrong","fails","failed","failure","problem","issue","issues","lacking","mediocre"];
+const nlpSamples = [
+  "The dashboard is excellent and the insights are incredibly useful.",
+  "This was a frustrating experience — slow, confusing and full of issues.",
+  "The report was delivered on Tuesday with three charts."
+];
+let nlpSampleIdx = 1;
+function tokenize(t){ return t.toLowerCase().replace(/[^a-z\s']/g," ").split(/\s+/).filter(function(w){ return w.length>1; }); }
+function distRow(l,v,c){
+  return '<div class="dist-row"><span>'+l+'</span><div class="dist-track"><div class="dist-fill" data-w="'+v+'" style="width:'+(reduceMotion?v:0)+'%;background:'+c+'"></div></div><span>'+v+'%</span></div>';
+}
+function analyzeSentiment(){
+  const text = $("#nlpInput").value.trim();
+  const err = $("#nlpErr"), out = $("#nlpOut");
+  if(!text){ err.classList.add("show"); out.classList.remove("show"); return; }
+  err.classList.remove("show");
+  const toks = tokenize(text);
+  const pos = toks.filter(function(w){ return POS_WORDS.indexOf(w)>-1; });
+  const neg = toks.filter(function(w){ return NEG_WORDS.indexOf(w)>-1; });
+  const p = pos.length, n = neg.length, total = toks.length || 1;
+  let label, cls, score;
+  if(p===n){ label="NEUTRAL"; cls="sent-neu"; score=0; }
+  else if(p>n){ label="POSITIVE"; cls="sent-pos"; score=(p-n)/total; }
+  else { label="NEGATIVE"; cls="sent-neg"; score=(n-p)/total; }
+  const confidence = Math.min(98, Math.round(55 + 43*Math.min(1, (p+n)/Math.max(4,total)*2 + score*2)));
+  const distP = (p===0&&n===0) ? 34 : Math.round(p/(p+n||1)*100);
+  const distN = (p===0&&n===0) ? 33 : Math.round(n/(p+n||1)*100);
+  const distNeu = Math.max(0, 100-distP-distN);
+  $("#nlpScore").innerHTML = '<span class="'+cls+'">'+label+'</span>';
+  $("#nlpConf").textContent = confidence + "%";
+  const kw = pos.concat(neg).slice(0,10);
+  $("#nlpKw").innerHTML = kw.length ? kw.map(function(w){ return "<span>"+w+"</span>"; }).join("") : '<span style="opacity:.5">no lexicon matches</span>';
+  $("#nlpDist").innerHTML = distRow("Positive",distP,"#b8ff48") + distRow("Neutral",distNeu,"#78ddff") + distRow("Negative",distN,"#ff7a7a");
+  out.classList.add("show");
+  if(!reduceMotion){
+    $$("#nlpDist .dist-fill").forEach(function(f){
+      const w=f.dataset.w; f.style.width="0";
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ f.style.width=w+"%"; }); });
+    });
+  }
+}
+$("#nlpRun").addEventListener("click", analyzeSentiment);
+$("#nlpSample").addEventListener("click", function(){
+  $("#nlpInput").value = nlpSamples[nlpSampleIdx % nlpSamples.length];
+  nlpSampleIdx++;
+  analyzeSentiment();
+});
+/* ============================================================
+   04 — SQL EXPLORER (simulated, deterministic)
+   ============================================================ */
+const sqlQueries = [
+  { name:"Top products by revenue",
+    sql:"SELECT product,\n       SUM(revenue) AS total_revenue\nFROM   sales\nGROUP  BY product\nORDER  BY total_revenue DESC\nLIMIT  5;",
+    ms: 41,
+    cols:["product","total_revenue"],
+    rows:[["Laptop","$245,000"],["Monitor","$180,300"],["Keyboard","$91,240"],["Mouse","$64,810"],["Headset","$52,470"]] },
+  { name:"Monthly revenue trend",
+    sql:"SELECT month,\n       SUM(revenue) AS revenue\nFROM   sales\nWHERE  year = 2026\nGROUP  BY month\nORDER  BY month;",
+    ms: 36,
+    cols:["month","revenue"],
+    rows:[["Jan","$108,000"],["Feb","$114,000"],["Mar","$122,000"],["Apr","$118,000"],["May","$133,000"],["Jun","$142,000"]] },
+  { name:"Revenue by region",
+    sql:"SELECT region,\n       SUM(revenue) AS revenue\nFROM   sales\nGROUP  BY region\nORDER  BY revenue DESC;",
+    ms: 28,
+    cols:["region","revenue"],
+    rows:[["Pakistan","$828,460"],["UAE","$432,240"],["UK","$306,170"],["USA","$234,130"]] },
+  { name:"Customers by segment",
+    sql:"SELECT segment,\n       COUNT(*) AS customers,\n       ROUND(AVG(order_value), 0) AS avg_order\nFROM   customers\nGROUP  BY segment\nORDER  BY customers DESC;",
+    ms: 33,
+    cols:["segment","customers","avg_order"],
+    rows:[["Retail","9,214","$86"],["Corporate","5,408","$214"],["Wholesale","2,931","$402"],["Enterprise","939","$1,180"]] }
+];
+let sqlIdx = 0;
+function renderSqlChips(){
+  $("#qchips").innerHTML = sqlQueries.map(function(q,i){ return '<button data-q="'+i+'" aria-pressed="'+(i===0)+'">'+q.name+'</button>'; }).join("");
+}
+function renderSql(){
+  const q = sqlQueries[sqlIdx];
+  $("#sqlCode").textContent = q.sql;
+  $$("#qchips button").forEach(function(b,i){ b.setAttribute("aria-pressed", i===sqlIdx?"true":"false"); });
+  $("#sqlResult").innerHTML = ""; $("#sqlNote").textContent = "";
+}
+function runSql(){
+  const q = sqlQueries[sqlIdx], res = $("#sqlResult"), note = $("#sqlNote");
+  res.innerHTML = '<div style="font:400 .78rem var(--mono);color:var(--muted)"><span class="spinner"></span>Executing query…</div>';
+  note.textContent = "";
+  const render = function(){
+    const head = "<tr>"+q.cols.map(function(c){ return "<th>"+c+"</th>"; }).join("")+"</tr>";
+    const body = q.rows.map(function(r){ return "<tr>"+r.map(function(c){ return "<td>"+c+"</td>"; }).join("")+"</tr>"; }).join("");
+    res.innerHTML = '<table class="data"><thead>'+head+'</thead><tbody>'+body+'</tbody></table>';
+    note.textContent = q.rows.length+" rows returned · executed in "+q.ms+" ms (simulated)";
+  };
+  if(reduceMotion){ render(); } else { setTimeout(render, 650); }
+}
+renderSqlChips(); renderSql();
+$("#qchips").addEventListener("click", function(e){ const b=e.target.closest("button"); if(!b)return; sqlIdx=parseInt(b.dataset.q,10); renderSql(); });
+$("#sqlRun").addEventListener("click", runSql);
+
+/* ============================================================
+   05 — DATA CLEANING LAB (deterministic before/after)
+   ============================================================ */
+const cleanBefore = { rows:"12,540", cols:"14", missing:"327", dup:"84", quality:"71%" };
+const cleanAfter  = { rows:"12,456", cols:"14", missing:"0", dup:"0", quality:"98%" };
+let cleaned = false;
+const cleanRows = [
+  { name:"Ahmed Raza",  email:"ahmed.raza@mail.com",  city:"Lahore",    amount:"12,400", dirty:[false,false,false,false] },
+  { name:"Sara Khan",   email:"",                    city:"Karachi",   amount:"8,900",  dirty:[false,true,false,false]  },
+  { name:"Ahmed Raza",  email:"ahmed.raza@mail.com", city:"Lahore",    amount:"12,400", dirty:[true,true,true,true]     },
+  { name:"Bilal Ahmed", email:"bilal.a@mail.com",    city:"",          amount:"15,200", dirty:[false,false,true,false]  },
+  { name:"Fatima Noor", email:"fatima.n@mail.com",   city:"Islamabad", amount:"9,750",  dirty:[false,false,false,false] },
+  { name:"Sara Khan",   email:"sara.k@mail.com",     city:"Karachi",   amount:"8,900",  dirty:[false,false,false,false] }
+];
+const cleanRowsAfter = [
+  { name:"Ahmed Raza",  email:"ahmed.raza@mail.com", city:"Lahore",    amount:"12,400", fixed:[false,false,false,false] },
+  { name:"Sara Khan",   email:"sara.k@mail.com",     city:"Karachi",   amount:"8,900",  fixed:[false,true,false,false]  },
+  { name:"Bilal Ahmed", email:"bilal.a@mail.com",    city:"Unknown",   amount:"15,200", fixed:[false,false,true,false]  },
+  { name:"Fatima Noor", email:"fatima.n@mail.com",   city:"Islamabad", amount:"9,750",  fixed:[false,false,false,false] }
+];
+function statCard(v,l){ return '<div class="clean-stat"><div class="v">'+v+'</div><div class="l">'+l+'</div></div>'; }
+function renderCleanStats(){
+  const s = cleaned ? cleanAfter : cleanBefore;
+  $("#cleanStats").innerHTML =
+    statCard(s.rows,"ROWS") + statCard(s.cols,"COLUMNS") + statCard(s.missing,"MISSING VALUES") + statCard(s.dup,"DUPLICATES") + statCard(s.quality,"QUALITY SCORE");
+}
+function cleanTableHTML(tableBefore){
+  const rows = tableBefore ? cleanRows : cleanRowsAfter;
+  const cols = ["name","email","city","amount"];
+  let html = "<thead><tr><th>name</th><th>email</th><th>city</th><th>amount</th></tr></thead><tbody>";
+  rows.forEach(function(r){
+    html += "<tr>" + cols.map(function(c,i){
+      const cls = tableBefore ? (r.dirty[i]?"dirty":"") : (r.fixed[i]?"fixed":"");
+      return '<td class="'+cls+'">'+(r[c]===""?"∅":r[c])+"</td>";
+    }).join("") + "</tr>";
+  });
+  return html + "</tbody>";
+}
+function renderCleanTable(){ $("#cleanTable").innerHTML = cleanTableHTML(!cleaned); }
+function setBA(showBefore){
+  $("#baBefore").setAttribute("aria-pressed", showBefore?"true":"false");
+  $("#baAfter").setAttribute("aria-pressed", showBefore?"false":"true");
+  renderCleanStats();
+  $("#cleanTable").innerHTML = cleanTableHTML(showBefore || !cleaned);
+}
+function animateClean(){
+  if(cleaned) return;
+  const btn = $("#cleanBtn"); btn.disabled = true;
+  const parse = function(s){ return parseInt(s.replace(/,/g,""),10); };
+  const bR = parse(cleanBefore.rows), aR = parse(cleanAfter.rows);
+  const bM = parse(cleanBefore.missing), bD = parse(cleanBefore.dup);
+  if(reduceMotion){ cleaned = true; renderCleanStats(); renderCleanTable(); $("#baAfter").disabled=false; setBA(false); btn.disabled=false; return; }
+  const steps = 12; let i = 0;
+  const iv = setInterval(function(){
+    i++;
+    const f = i/steps;
+    const rows = Math.round(bR + (aR-bR)*f).toLocaleString("en-US");
+    const missing = Math.round(bM*(1-f)), dup = Math.round(bD*(1-f)), q = Math.round(71+(98-71)*f)+"%";
+    $("#cleanStats").innerHTML = statCard(rows,"ROWS")+statCard("14","COLUMNS")+statCard(missing,"MISSING VALUES")+statCard(dup,"DUPLICATES")+statCard(q,"QUALITY SCORE");
+    if(i>=steps){
+      clearInterval(iv); cleaned = true;
+      renderCleanStats(); renderCleanTable();
+      $("#baAfter").disabled = false; setBA(false); btn.disabled = false;
+    }
+  }, 90);
+}
+$("#cleanBtn").addEventListener("click", animateClean);
+$("#baBefore").addEventListener("click", function(){ setBA(true); });
+$("#baAfter").addEventListener("click", function(){ if(!$("#baAfter").disabled) setBA(false); });
+renderCleanStats(); renderCleanTable();
+
+/* ============================================================
+   CAPABILITIES — skill → project mapping
+   ============================================================ */
+const skillMap = {
+  "Python": ["proj-flood","proj-sales","proj-nlp","proj-clean","proj-acad-data"],
+  "SQL": ["proj-flood","proj-sales","proj-sql","proj-acad-data","proj-acad-db"],
+  "Data Visualization": ["proj-sales","proj-nlp","proj-acad-data"],
+  "Tableau": ["proj-sales","proj-acad-data"],
+  "Power BI": ["proj-sales"],
+  "Microsoft Excel": ["proj-sales","proj-clean"],
+  "Database Management": ["proj-sql","proj-acad-db"],
+  "Statistical Analysis": ["proj-nlp","proj-acad-data","proj-clean"],
+  "Problem-Solving": ["proj-flood","proj-clean","proj-acad-data"],
+  "Analytical Thinking": ["proj-flood","proj-sql","proj-acad-data"]
+};
+function renderCapChips(){
+  $("#capChips").innerHTML = Object.keys(skillMap).map(function(s){ return '<button aria-pressed="false">'+s+"</button>"; }).join("");
+}
+function clearSkill(){
+  $$("#capChips button").forEach(function(b){ b.setAttribute("aria-pressed","false"); });
+  $$(".project").forEach(function(p){ p.classList.remove("lit"); p.classList.remove("dim"); });
+  $("#capHint").innerHTML = 'Showing all projects. <button id="capReset">Reset</button>';
+  $("#capReset").addEventListener("click", clearSkill);
+}
+renderCapChips(); clearSkill();
+$("#capChips").addEventListener("click", function(e){
+  const b = e.target.closest("button"); if(!b) return;
+  const skill = b.textContent, ids = skillMap[skill] || [];
+  $$("#capChips button").forEach(function(x){ x.setAttribute("aria-pressed", x===b?"true":"false"); });
+  $$(".project").forEach(function(p){
+    const hit = ids.indexOf(p.id) > -1;
+    p.classList.toggle("lit", hit);
+    p.classList.toggle("dim", !hit);
+  });
+  $("#capHint").innerHTML = '<strong>'+skill+'</strong> is demonstrated in '+ids.length+' project'+(ids.length===1?"":"s")+'. <button id="capReset">Reset</button>';
+  $("#capReset").addEventListener("click", clearSkill);
+  const first = document.getElementById(ids[0]);
+  if(first && typeof first.scrollIntoView === "function"){ setTimeout(function(){ first.scrollIntoView({behavior: reduceMotion?"auto":"smooth", block:"center"}); }, 150); }
+});
+
+/* ============================================================
+   CASE NOTES toggles
+   ============================================================ */
+$$(".notes-btn").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    const panel = $("#"+btn.dataset.notes);
+    const open = panel.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open?"true":"false");
+    btn.firstChild.textContent = open ? "Close case notes " : "Open case notes ";
+  });
+});
+
+/* ============================================================
+   PROJECT DEMO VIDEO — paste-to-preview YouTube loader
+   ============================================================ */
+const projectVideoUrl = siteConfig.demoVideoUrl || "";
+function getYouTubeId(url){
+  try{
+    const parsed = new URL(url);
+    if (parsed.hostname.indexOf("youtu.be") > -1) return parsed.pathname.slice(1);
+    if (parsed.hostname.indexOf("youtube.com") > -1) return parsed.searchParams.get("v") || parsed.pathname.split("/").filter(Boolean).pop();
+  }catch(_){ return null; }
+  return null;
+}
+function loadVideo(url, showMessage){
+  if(showMessage === undefined) showMessage = true;
+  const frame = document.querySelector("#video-frame");
+  const empty = document.querySelector("#video-empty");
+  const message = document.querySelector("#video-message");
+  const videoId = getYouTubeId(url);
+  if(!videoId){
+    if(showMessage) message.textContent = "Please paste a valid YouTube watch, share, or embed link.";
+    return false;
+  }
+  frame.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(videoId);
+  frame.hidden = false; empty.hidden = true;
+  if(showMessage) message.textContent = "Video preview loaded. To keep it after refresh, add this link to demoVideoUrl in siteConfig.";
+  return true;
+}
+document.querySelector("#video-form").addEventListener("submit", function(event){
+  event.preventDefault();
+  loadVideo(document.querySelector("#video-url").value);
+});
+if(projectVideoUrl) loadVideo(projectVideoUrl, false);
+
+/* ============================================================
+   NAV active section + scroll reveals
+   ============================================================ */
+const navLinks = $$("[data-nav]");
+const sections = ["work","demos","about","contact"];
+if(typeof IntersectionObserver !== "undefined"){
+  const navObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        navLinks.forEach(function(a){ a.classList.toggle("active", a.getAttribute("href")==="#"+en.target.id); });
+      }
+    });
+  }, { rootMargin:"-40% 0px -55% 0px" });
+  sections.forEach(function(id){ const el=document.getElementById(id); if(el) navObs.observe(el); });
+  const revObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("in"); revObs.unobserve(en.target); } });
+  }, { threshold:0.08 });
+  $$(".reveal").forEach(function(el){ revObs.observe(el); });
+} else {
+  $$(".reveal").forEach(function(el){ el.classList.add("in"); });
+}
+</script>
+</body>
+</html>
