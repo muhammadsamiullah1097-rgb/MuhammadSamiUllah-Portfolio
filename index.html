@@ -185,6 +185,8 @@ table.data td{padding:.65rem .7rem;border-bottom:1px solid rgba(238,247,244,.06)
 table.data tr:last-child td{border-bottom:none}
 table.data td.dirty{background:rgba(255,122,122,.12)}
 table.data td.fixed{background:rgba(184,255,72,.1)}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.table-scroll table.data{min-width:560px}
 .qchips{display:flex;gap:.5rem;flex-wrap:wrap}
 .qchips button{background:transparent;border:1px solid var(--line);color:var(--muted);font:700 .72rem var(--sans);padding:.6rem 1rem;cursor:pointer;transition:all .18s}
 .qchips button[aria-pressed="true"]{background:var(--acid);color:var(--ink);border-color:var(--acid)}
@@ -248,6 +250,10 @@ table.data td.fixed{background:rgba(184,255,72,.1)}
 /* footer */
 footer{max-width:1440px;min-height:85px;margin:auto;padding:1.5rem clamp(1.3rem,5vw,5.4rem);display:flex;align-items:center;justify-content:space-between;gap:1rem;color:var(--muted);font:500 .56rem var(--mono);border-top:1px solid var(--line)}
 footer p{margin:0}
+.foot-social{display:flex;gap:.7rem}
+.foot-social a{width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--line);color:var(--muted);transition:color .2s,border-color .2s,transform .2s}
+.foot-social a:hover{color:var(--acid);border-color:var(--acid);transform:translateY(-2px)}
+.foot-social svg{width:18px;height:18px;display:block}
 /* ---------- hero portrait ---------- */
 .hero-portrait{align-self:stretch;min-height:560px;position:relative;overflow:hidden;border:1px solid var(--line);background:linear-gradient(145deg,#14282c,#0c1319)}
 .hero-portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,13,17,.62),transparent 48%);pointer-events:none}
@@ -263,7 +269,7 @@ footer p{margin:0}
 .copy-btn{background:none;border:0;border-bottom:1px solid transparent;color:var(--acid);font:700 .62rem var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-left:.9rem;padding:.2rem 0}
 .copy-btn:hover{border-bottom-color:var(--acid)}
 /* reveal */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
 .reveal.in{opacity:1;transform:none}
 /* responsive */
 @media(max-width:900px){
@@ -300,6 +306,16 @@ footer p{margin:0}
   .about-details{flex-direction:column;gap:1.6rem}
   .contact{padding-top:5rem;padding-bottom:5rem}
   .identity-strip{height:44px}
+  .hero h1{font-size:clamp(3rem,15vw,3.8rem)}
+  .contact h2{font-size:clamp(2.4rem,11.5vw,2.9rem)}
+  .section-head h2,.band h2{font-size:clamp(2.3rem,11vw,2.9rem)}
+  .modal-box{left:0;right:0;top:auto;bottom:0;transform:none;width:100%;max-height:94vh;border-radius:18px 18px 0 0;border-left:0;border-right:0;border-bottom:0;padding:1.6rem 1.3rem 2.2rem}
+  .modal.open .modal-box{animation:sheetup .34s cubic-bezier(.2,.8,.2,1)}
+  @keyframes sheetup{from{transform:translateY(48px);opacity:0}}
+  .modal-x{top:.7rem;right:.7rem;width:38px;height:38px}
+  .pm-cols{grid-template-columns:1fr}
+  .way-card{padding:.9rem 1rem}
+  .way-meta strong{font-size:.82rem}
   footer{flex-wrap:wrap;align-content:center}
   footer p{order:3;flex-basis:100%}
 }
@@ -310,6 +326,7 @@ footer p{margin:0}
   .reveal{opacity:1;transform:none;transition:none}
   .dist-fill{transition:none}
   .spinner{animation:none}
+  .live-badge i{animation:none}
   .button::after{display:none}
   .proj-card:hover,.tool-card:hover,.hobby:hover{transform:none}
   .modal.open .modal-box{animation:none}
@@ -335,6 +352,30 @@ footer p{margin:0}
 .nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--acid)}
 .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--acid);transition:right .25s ease}
 .nav-links a:hover::after,.nav-links a.active::after{right:0}
+/* ---------- hamburger + mobile nav ---------- */
+.menu-btn{display:none;background:var(--surface);border:1px solid var(--line);width:48px;height:48px;cursor:pointer;position:relative;flex:none;margin-left:auto;transition:border-color .2s}
+.menu-btn:hover{border-color:var(--acid)}
+.menu-btn span{position:absolute;left:13px;right:13px;height:2px;background:var(--text);transition:top .3s ease,transform .3s ease,opacity .2s ease,background .2s}
+.menu-btn span:nth-child(1){top:16px}
+.menu-btn span:nth-child(2){top:23px}
+.menu-btn span:nth-child(3){top:30px}
+.menu-btn[aria-expanded="true"] span:nth-child(1){top:23px;transform:rotate(45deg);background:var(--acid)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){top:23px;transform:rotate(-45deg);background:var(--acid)}
+.mobile-nav{display:none}
+@media(max-width:860px){
+  .nav-links,#resumeBtn{display:none}
+  .menu-btn{display:block}
+  .mobile-nav{display:block;position:fixed;inset:0;z-index:100;visibility:hidden;transition:visibility .35s}
+  .mobile-nav.open{visibility:visible}
+  .mobile-nav-overlay{position:absolute;inset:0;background:rgba(4,8,10,.72);backdrop-filter:blur(4px);opacity:0;transition:opacity .3s ease}
+  .mobile-nav.open .mobile-nav-overlay{opacity:1}
+  .mobile-nav-panel{position:absolute;top:0;right:0;bottom:0;width:min(340px,86vw);background:var(--surface);border-left:1px solid var(--line);padding:6.5rem 2.2rem 2.2rem;display:flex;flex-direction:column;transform:translateX(102%);transition:transform .38s cubic-bezier(.2,.8,.2,1);overflow:auto}
+  .mobile-nav.open .mobile-nav-panel{transform:none}
+  .mobile-nav-panel a[data-nav]{font-size:1.7rem;font-weight:800;letter-spacing:-.045em;color:var(--text);padding:.85rem 0;border-bottom:1px solid var(--line);transition:color .2s,padding-left .2s}
+  .mobile-nav-panel a[data-nav]:hover{color:var(--acid);padding-left:.4rem}
+  .mobile-nav-panel .button{margin-top:2rem}
+}
 /* ---------- grain ---------- */
 body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
 /* ---------- marquee ---------- */
@@ -352,6 +393,9 @@ body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;o
 .proj-card.dim{opacity:.3;filter:saturate(.4)}
 .proj-card.lit{border-color:var(--acid);box-shadow:0 0 0 1px var(--acid),0 18px 60px -20px rgba(184,255,72,.28)}
 .proj-cover{display:block;height:128px;border-bottom:1px solid var(--line);background:radial-gradient(circle at 70% 20%,rgba(120,221,255,.12),transparent 55%),radial-gradient(circle at 20% 80%,rgba(184,255,72,.1),transparent 50%),#0c1418;position:relative;overflow:hidden;flex:none}
+.live-badge{position:absolute;top:.8rem;right:.8rem;display:inline-flex;align-items:center;gap:.4rem;background:var(--acid);color:var(--ink);font:800 .58rem var(--mono);letter-spacing:.1em;padding:.32rem .6rem}
+.live-badge i{width:7px;height:7px;border-radius:50%;background:var(--ink);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.75)}}
 .proj-cover svg{position:absolute;inset:0;margin:auto;transition:transform .3s ease}
 .proj-card:hover .proj-cover svg{transform:scale(1.12) rotate(-2deg)}
 .proj-card-body{display:flex;flex-direction:column;gap:.55rem;padding:1.2rem;flex:1}
@@ -406,6 +450,8 @@ body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;o
 .fact{border:1px solid var(--line);padding:.95rem 1rem;background:var(--surface)}
 .fact span{display:block;color:var(--acid);font:500 .52rem var(--mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
 .fact strong{font-size:.78rem;line-height:1.5;font-weight:700}
+.fact-link{color:var(--acid);border-bottom:1px solid rgba(184,255,72,.4);padding-bottom:.1rem;transition:border-color .2s}
+.fact-link:hover{border-bottom-color:var(--acid)}
 .hobbies{margin-top:2.2rem}
 .hobby-grid{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.1rem}
 .hobby{display:inline-flex;align-items:center;gap:.55rem;border:1px solid var(--line);padding:.6rem .95rem;font-size:.78rem;font-weight:700;background:var(--surface);transition:transform .2s,border-color .2s,box-shadow .2s}
@@ -431,15 +477,29 @@ body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;o
 .f-err.show{display:block}
 .field.invalid input,.field.invalid textarea{border-color:#ff7a7a}
 .c-status{margin:1rem 0 0;font:500 .72rem var(--mono);color:var(--acid);min-height:1.5em;letter-spacing:.03em}
-.c-direct{display:flex;flex-direction:column;gap:1.1rem}
-.c-direct h3{font-size:1.4rem;letter-spacing:-.04em;margin:0 0 .2rem}
-.c-direct>p{color:var(--muted);font-size:.85rem;line-height:1.65;margin:0 0 .6rem;max-width:340px}
-.c-line{display:flex;align-items:center;justify-content:space-between;gap:1rem;border:1px solid var(--line);padding:1rem 1.2rem;background:var(--surface);transition:border-color .2s,transform .2s}
-.c-line:hover{border-color:var(--acid);transform:translateX(4px)}
-.c-line span{font:500 .58rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.c-line strong{font-size:.85rem;font-weight:700}
-.c-line b{color:var(--acid)}
-.c-row{display:flex;gap:.8rem;flex-wrap:wrap}
+.contact-lead{max-width:430px;color:var(--muted);font-size:.92rem;line-height:1.7;margin:0 0 2rem}
+.way-cards{display:flex;flex-direction:column;gap:.9rem}
+.way-card{display:flex;align-items:center;gap:1.1rem;border:1px solid var(--line);background:var(--surface);padding:1.05rem 1.25rem;transition:border-color .22s,transform .22s,box-shadow .22s}
+.way-card:hover{border-color:var(--acid);transform:translateX(5px);box-shadow:0 16px 36px -20px rgba(184,255,72,.45)}
+.way-icon{width:46px;height:46px;flex:none;display:grid;place-items:center;background:var(--ink);border:1px solid var(--line);color:var(--acid);transition:border-color .22s}
+.way-card:hover .way-icon{border-color:rgba(184,255,72,.5)}
+.way-icon svg{width:20px;height:20px;display:block}
+.way-meta{display:flex;flex-direction:column;gap:.15rem}
+.way-meta span{font:500 .56rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.way-meta strong{font-size:.92rem;font-weight:800;letter-spacing:-.02em}
+.way-card>b{margin-left:auto;color:var(--acid);font-size:1.05rem;transition:transform .22s}
+.way-card:hover>b{transform:translate(2px,-2px)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.field select{width:100%;background:var(--surface);border:1px solid var(--line);padding:1.05rem 2.8rem 1.05rem 1rem;color:var(--text);font-size:.9rem;appearance:none;-webkit-appearance:none;cursor:pointer;border-radius:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23b8ff48' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1.1rem center;transition:border-color .2s,box-shadow .2s}
+.field select:focus{border-color:var(--acid);box-shadow:0 0 0 1px var(--acid);outline:0}
+.field select option{background:#101a20;color:var(--text)}
+.static-label{display:block;margin:0 0 .55rem;font:500 .58rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--acid)}
+.honey{position:absolute;left:-9999px;top:auto;width:1px;height:1px;opacity:0;pointer-events:none}
+.plane{width:1.05rem;height:1.05rem;flex:none}
+.spinner{display:inline-block;width:1rem;height:1rem;flex:none;border:2px solid rgba(8,13,17,.28);border-top-color:var(--ink);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.c-status.error{color:#ff7a7a}
+@media(max-width:640px){.frow{grid-template-columns:1fr}}
 /* ---------- scroll-target flash ---------- */
 .flash{animation:flash 1.6s ease}
 @keyframes flash{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 2px var(--acid)}}
@@ -475,22 +535,34 @@ body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;o
     <a href="#contact" data-nav>Contact</a>
   </nav>
   <a class="button button-sm" id="resumeBtn" href="#" target="_blank" rel="noopener">Download CV <b>↓</b></a>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu"><span></span><span></span><span></span></button>
 </header>
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-overlay" data-menu-close></div>
+  <nav class="mobile-nav-panel" aria-label="Mobile navigation">
+    <a href="#projects" data-nav>Projects</a>
+    <a href="#demos" data-nav>Demos</a>
+    <a href="#tools" data-nav>Tools</a>
+    <a href="#about" data-nav>About</a>
+    <a href="#contact" data-nav>Contact</a>
+    <a class="button" href="assets/Muhammad-Sami-Ullah-CV.pdf" download="Muhammad-Sami-Ullah-CV.pdf">Download CV <b>↓</b></a>
+  </nav>
+</div>
 <main id="main">
 <!-- HERO -->
 <section class="hero shell" id="top">
-  <div class="reveal hero-portrait">
-    <img src="assets/profile.png" alt="Portrait of Muhammad Sami Ullah">
+  <div class="reveal hero-portrait" style="--d:.05s">
+    <img src="assets/profile.png" alt="Portrait of Muhammad Sami Ullah" fetchpriority="high" width="1080" height="1080">
     <div class="portrait-grid" aria-hidden="true"></div>
     <div class="portrait-label"><span>Profile / 01</span><span>Muhammad Sami Ullah</span></div>
     <div class="portrait-mark"><span>MSU</span><small>Data × Business Analytics</small></div>
   </div>
-  <div class="reveal hero-copy">
-    <p class="eyebrow"><span></span>Business Data Analyst</p>
-    <h1>Muhammad<br><em>Sami Ullah.</em></h1>
-    <p class="hero-profession">I build analytical tools, dashboards and data-driven experiences you can actually try.</p>
-    <p class="hero-intro">Business data analyst working between analytics, AI and digital product design — this portfolio is a live demonstration, not a brochure.</p>
-    <div class="hero-actions" id="heroActions">
+  <div class="hero-copy">
+    <p class="eyebrow reveal" style="--d:.15s"><span></span>Business Data Analyst</p>
+    <h1 class="reveal" style="--d:.24s">Muhammad<br><em>Sami Ullah.</em></h1>
+    <p class="hero-profession reveal" style="--d:.33s">I build analytical tools, dashboards and data-driven experiences you can actually try.</p>
+    <p class="hero-intro reveal" style="--d:.42s">Business data analyst working between analytics, AI and digital product design — this portfolio is a live demonstration, not a brochure.</p>
+    <div class="hero-actions reveal" id="heroActions" style="--d:.51s">
       <a class="button" href="#demos">Explore the demos <b>↓</b></a>
       <a class="link" id="heroFloodBtn" href="https://muhammadsamiullah1097-rgb.github.io/PakistanFloodPredictionTool/" target="_blank" rel="noopener">View live demo <b>↗</b></a>
     </div>
@@ -525,7 +597,7 @@ body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;o
   </div>
   <div class="proj-grid reveal" id="projGrid" role="list" aria-label="Project cards">
     <button class="proj-card" role="listitem" data-proj="flood" aria-haspopup="dialog">
-      <span class="proj-cover" aria-hidden="true"><svg viewBox="0 0 120 80" width="76" height="50" fill="none" stroke="#b8ff48" stroke-width="2.5" stroke-linecap="round"><path d="M6 26c10-10 20-10 30 0s20 10 30 0 20-10 30 0"/><path d="M6 44c10-10 20-10 30 0s20 10 30 0 20-10 30 0" stroke="#78ddff"/><path d="M6 62c10-10 20-10 30 0s20 10 30 0 20-10 30 0" opacity=".45"/></svg></span>
+      <span class="proj-cover" aria-hidden="true"><svg viewBox="0 0 120 80" width="76" height="50" fill="none" stroke="#b8ff48" stroke-width="2.5" stroke-linecap="round"><path d="M6 26c10-10 20-10 30 0s20 10 30 0 20-10 30 0"/><path d="M6 44c10-10 20-10 30 0s20 10 30 0 20-10 30 0" stroke="#78ddff"/><path d="M6 62c10-10 20-10 30 0s20 10 30 0 20-10 30 0" opacity=".45"/></svg><span class="live-badge"><i></i>LIVE</span></span>
       <span class="proj-card-body">
         <span class="proj-card-type">Decision-support tool · Live</span>
         <span class="proj-title">Pakistan Flood Prediction System</span>
@@ -875,7 +947,7 @@ body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;o
 <section class="about shell" id="about">
   <div class="reveal">
     <figure class="about-figure">
-      <img src="assets/profile.png" alt="Portrait of Muhammad Sami Ullah">
+      <img src="assets/profile.png" alt="Portrait of Muhammad Sami Ullah" loading="lazy" width="1080" height="1080">
       <figcaption><span>Islamabad, PK</span><span>UTC+5</span></figcaption>
     </figure>
     <div class="facts-grid">
@@ -883,6 +955,7 @@ body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;o
       <div class="fact"><span>Languages</span><strong>English · Urdu</strong></div>
       <div class="fact"><span>Education</span><strong>BS Business Data Analysis, COMSATS Islamabad</strong></div>
       <div class="fact"><span>Focus</span><strong>Python · SQL · BI dashboards</strong></div>
+      <div class="fact"><span>LinkedIn</span><strong><a class="fact-link" href="https://www.linkedin.com/in/muhammad-sami-ullah-876121357" target="_blank" rel="noopener">Connect ↗</a></strong></div>
     </div>
   </div>
   <div class="reveal">
@@ -920,40 +993,79 @@ body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;o
 
 <!-- CONTACT -->
 <section class="contact shell" id="contact">
-  <p class="eyebrow reveal"><span></span>Contact me</p>
-  <h2 class="reveal">Let's work<br><em>together.</em></h2>
   <div class="contact-grid">
-    <form class="cform reveal" id="cForm" novalidate aria-label="Contact form">
-      <div class="field">
-        <input id="cName" name="name" type="text" placeholder=" " autocomplete="name" aria-describedby="eName">
-        <label for="cName">Your name</label>
-        <span class="f-err" id="eName">Please tell me your name.</span>
+    <div class="reveal">
+      <p class="eyebrow"><span></span>05 · Get in touch</p>
+      <h2>Let's discuss an<br><em>opportunity.</em></h2>
+      <p class="contact-lead">Have a data challenge, project, or full-time / contract role in Business Data Analytics, Python data science, or SQL database management? Feel free to reach out directly.</p>
+      <div class="way-cards">
+        <a class="way-card" id="contactLinkedin" href="https://www.linkedin.com/in/muhammad-sami-ullah-876121357" target="_blank" rel="noopener">
+          <span class="way-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45z"/></svg></span>
+          <span class="way-meta"><span>LinkedIn</span><strong>Connect with me</strong></span>
+          <b>↗</b>
+        </a>
+        <a class="way-card" id="contactGithub" href="https://github.com/muhammadsamiullah1097-rgb" target="_blank" rel="noopener">
+          <span class="way-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.2.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg></span>
+          <span class="way-meta"><span>GitHub</span><strong>muhammadsamiullah1097-rgb</strong></span>
+          <b>↗</b>
+        </a>
+        <a class="way-card" href="https://maps.google.com/?q=Islamabad,Pakistan" target="_blank" rel="noopener">
+          <span class="way-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span class="way-meta"><span>Location</span><strong>Islamabad, Pakistan</strong></span>
+          <b>↗</b>
+        </a>
       </div>
-      <div class="field">
-        <input id="cEmail" name="email" type="email" placeholder=" " autocomplete="email" aria-describedby="eEmail">
-        <label for="cEmail">Email address</label>
-        <span class="f-err" id="eEmail">Enter a valid email address.</span>
+    </div>
+    <form class="cform reveal" id="cForm" novalidate aria-label="Contact form">
+      <!--
+        FORM DELIVERY NOTE (site owner): this form POSTs via FormSubmit AJAX to the
+        owner's inbox. Before messages start arriving, submit ONE test message through
+        the live site, then click the activation link FormSubmit emails to the inbox.
+      -->
+      <div class="frow">
+        <div class="field">
+          <input id="cName" name="name" type="text" placeholder=" " autocomplete="name" aria-describedby="eName">
+          <label for="cName">Your name *</label>
+          <span class="f-err" id="eName">Please tell me your name.</span>
+        </div>
+        <div class="field">
+          <input id="cEmail" name="email" type="email" placeholder=" " autocomplete="email" aria-describedby="eEmail">
+          <label for="cEmail">Your email *</label>
+          <span class="f-err" id="eEmail">Enter a valid email address.</span>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="field">
+          <label class="static-label" for="cType">Opportunity type</label>
+          <select id="cType" name="opportunity_type">
+            <option>Business Data Analytics Project</option>
+            <option>Data Science &amp; ML Project</option>
+            <option>SQL &amp; Database Project</option>
+            <option>Dashboard &amp; BI Project</option>
+            <option>Full-time Role</option>
+            <option>Freelance / Contract</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="static-label" for="cTime">Start timeline</label>
+          <select id="cTime" name="start_timeline">
+            <option>Immediate / As soon as possible</option>
+            <option>Within a month</option>
+            <option>1–3 months</option>
+            <option>Flexible</option>
+          </select>
+        </div>
       </div>
       <div class="field">
         <textarea id="cMsg" name="message" placeholder=" " aria-describedby="eMsg"></textarea>
-        <label for="cMsg">Your message</label>
+        <label for="cMsg">Message / Project details *</label>
         <span class="f-err" id="eMsg">Write a few words about your project or question.</span>
       </div>
-      <button class="button" id="cSend" type="submit">Send message <b>→</b></button>
+      <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="button" id="cSend" type="submit"><svg class="plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>Send Inquiry Message</button>
       <p class="c-status" id="cStatus" role="status" aria-live="polite"></p>
     </form>
-    <div class="c-direct reveal">
-      <h3>Prefer it direct?</h3>
-      <p>Reach me on any of these — I usually reply within a day.</p>
-      <div class="c-row">
-        <a class="button" id="contactEmail" href="#">muhammadsamiullah1097@gmail.com <b>↗</b></a>
-        <button class="button-ghost" id="copyEmail" type="button">Copy email</button>
-      </div>
-      <a class="c-line" id="contactPhone" href="#"><span>Phone</span><strong>+92 332 1983086</strong><b>↗</b></a>
-      <a class="c-line" id="contactGithub" href="#" target="_blank" rel="noopener"><span>GitHub</span><strong>muhammadsamiullah1097-rgb</strong><b>↗</b></a>
-      <a class="c-line" id="contactLinkedin" href="#" target="_blank" rel="noopener"><span>LinkedIn</span><strong>Connect</strong><b>↗</b></a>
-      <a class="c-line" href="https://maps.google.com/?q=Islamabad,Pakistan" target="_blank" rel="noopener"><span>Based in</span><strong>Islamabad, Pakistan</strong><b>↗</b></a>
-    </div>
   </div>
 </section>
 <!-- PROJECT MODAL -->
@@ -980,6 +1092,10 @@ body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;o
 <footer>
   <a class="wordmark" href="#top">SAMI<span>_</span></a>
   <p>Building useful things with data, technology &amp; curiosity.</p>
+  <div class="foot-social">
+    <a href="https://github.com/muhammadsamiullah1097-rgb" target="_blank" rel="noopener" aria-label="GitHub profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.2.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg></a>
+    <a href="https://www.linkedin.com/in/muhammad-sami-ullah-876121357" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45z"/></svg></a>
+  </div>
   <p>© <span id="year">2026</span> Muhammad Sami Ullah</p>
 </footer>
 <script>
@@ -992,11 +1108,9 @@ body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;o
 const siteConfig = {
   "name": "Muhammad Sami Ullah",
   "title": "Business Data Analytics",
-  "email": "muhammadsamiullah1097@gmail.com",
-  "phone": "+92 332 1983086",
   "location": "Islamabad, Pakistan",
   "github": "https://github.com/muhammadsamiullah1097-rgb",
-  "linkedin": "",
+  "linkedin": "https://www.linkedin.com/in/muhammad-sami-ullah-876121357",
   "resumeUrl": "assets/Muhammad-Sami-Ullah-CV.pdf",
   "demoVideoUrl": "",
   "floodDashboard": "https://muhammadsamiullah1097-rgb.github.io/PakistanFloodPredictionTool/",
@@ -1010,16 +1124,9 @@ const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov
 
 /* ---------- Wire siteConfig ---------- */
 (function wireConfig(){
-  const mailto = "mailto:" + siteConfig.email;
-  const ce = $("#contactEmail");
-  ce.href = mailto;
-  ce.innerHTML = siteConfig.email + ' <b>↗</b>';
   $("#contactGithub").href = siteConfig.github;
   const li = $("#contactLinkedin");
   if (siteConfig.linkedin) { li.href = siteConfig.linkedin; } else { li.style.display = "none"; }
-  const cp = $("#contactPhone");
-  cp.href = "tel:" + siteConfig.phone.replace(/[^+\d]/g, "");
-  cp.textContent = siteConfig.phone;
   const rb = $("#resumeBtn");
   if (siteConfig.resumeUrl) {
     rb.href = siteConfig.resumeUrl;
@@ -1030,24 +1137,6 @@ const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov
     $("#heroActions").appendChild(hb);
   } else { rb.style.display = "none"; }
   $("#year").textContent = new Date().getFullYear();
-})();
-
-/* ---------- Copy email microinteraction ---------- */
-(function(){
-  const btn = document.querySelector("#copyEmail");
-  if(!btn) return;
-  const done = function(){ btn.textContent = "Copied ✓"; setTimeout(function(){ btn.textContent = "Copy email"; }, 1800); };
-  const fallback = function(){
-    const t = document.createElement("textarea");
-    t.value = siteConfig.email; document.body.appendChild(t); t.select();
-    try{ document.execCommand("copy"); }catch(e){}
-    document.body.removeChild(t); done();
-  };
-  btn.addEventListener("click", function(){
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(siteConfig.email).then(done, fallback);
-    } else { fallback(); }
-  });
 })();
 
 /* ---------- Tooltip ---------- */
@@ -1266,7 +1355,7 @@ function runSql(){
   const render = function(){
     const head = "<tr>"+q.cols.map(function(c){ return "<th>"+c+"</th>"; }).join("")+"</tr>";
     const body = q.rows.map(function(r){ return "<tr>"+r.map(function(c){ return "<td>"+c+"</td>"; }).join("")+"</tr>"; }).join("");
-    res.innerHTML = '<table class="data"><thead>'+head+'</thead><tbody>'+body+'</tbody></table>';
+    res.innerHTML = '<div class="table-scroll"><table class="data"><thead>'+head+'</thead><tbody>'+body+'</tbody></table></div>';
     note.textContent = q.rows.length+" rows returned · executed in "+q.ms+" ms (simulated)";
   };
   if(reduceMotion){ render(); } else { setTimeout(render, 650); }
@@ -1451,7 +1540,11 @@ const projectData = {
       { t:"Open project", h:"https://github.com/muhammadsamiullah1097-rgb/PakistanFloodPredictionTool" }
     ],
     badge: "Real project · live system — the panel above is a sample-data preview",
-    launchLabel: "Launch live demo", target: "proj-flood"
+    launchLabel: "Launch live demo", target: "proj-flood",
+    primaryUrl: "https://muhammadsamiullah1097-rgb.github.io/PakistanFloodPredictionTool/",
+    primaryLabel: "Open live dashboard",
+    secondaryUrl: "https://github.com/muhammadsamiullah1097-rgb/PakistanFloodPredictionTool",
+    secondaryLabel: "View code on GitHub"
   },
   "sales": {
     type: "Business intelligence · Demo",
@@ -1556,15 +1649,22 @@ function pmHTML(d){
 function openProject(key){
   const d = projectData[key]; if(!d) return;
   $("#pmBody").innerHTML = pmHTML(d);
-  $("#pmLaunch").addEventListener("click", function(){
-    closeModal($("#projModal"));
-    const t = document.getElementById(d.target);
-    if(t){
-      t.classList.add("flash");
-      setTimeout(function(){ t.classList.remove("flash"); }, 1700);
-      if(typeof t.scrollIntoView === "function"){ t.scrollIntoView({behavior: reduceMotion?"auto":"smooth", block:"start"}); }
-    }
-  });
+  if(d.primaryUrl){
+    /* Real live project: primary button opens the actual interface, no scroll-to-sample */
+    $("#pmBody .pm-actions").innerHTML =
+      '<a class="button" href="'+d.primaryUrl+'" target="_blank" rel="noopener">'+d.primaryLabel+' <b>↗</b></a>'
+      + '<a class="button-ghost" href="'+d.secondaryUrl+'" target="_blank" rel="noopener">'+d.secondaryLabel+' <b>↗</b></a>';
+  } else {
+    $("#pmLaunch").addEventListener("click", function(){
+      closeModal($("#projModal"));
+      const t = document.getElementById(d.target);
+      if(t){
+        t.classList.add("flash");
+        setTimeout(function(){ t.classList.remove("flash"); }, 1700);
+        if(typeof t.scrollIntoView === "function"){ t.scrollIntoView({behavior: reduceMotion?"auto":"smooth", block:"start"}); }
+      }
+    });
+  }
   openModal($("#projModal"));
 }
 $$(".proj-card").forEach(function(c){
@@ -1577,17 +1677,18 @@ $("#viewCvBtn").addEventListener("click", function(){
   openModal($("#cvModal"));
 });
 /* ============================================================
-   CONTACT FORM — validates, then opens the visitor's email app
-   (honest static-site approach: mailto with prefilled content)
+   CONTACT FORM — validates, then POSTs via FormSubmit AJAX so the
+   message lands in the owner's inbox. The destination address is
+   assembled from parts and never appears as a literal in the HTML.
+   NOTE (site owner): submit ONE test message through the live site,
+   then click the activation link FormSubmit emails to the inbox —
+   delivery starts only after that click.
    ============================================================ */
-function buildMailto(name, email, msg){
-  const subject = "Portfolio enquiry from " + name;
-  const body = msg + "\n\n— " + name + " (" + email + ")";
-  return "mailto:" + siteConfig.email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-}
+const inboxAddr = ["muhammadsamiullah1097", "gmail.com"].join("@");
 $("#cForm").addEventListener("submit", function(e){
   e.preventDefault();
-  const name = $("#cName").value.trim(), email = $("#cEmail").value.trim(), msg = $("#cMsg").value.trim();
+  const name = $("#cName").value.trim(), email = $("#cEmail").value.trim(),
+        type = $("#cType").value, time = $("#cTime").value, msg = $("#cMsg").value.trim();
   let ok = true;
   const check = function(cond, fieldId, errId){
     $("#"+fieldId).closest(".field").classList.toggle("invalid", !cond);
@@ -1598,13 +1699,38 @@ $("#cForm").addEventListener("submit", function(e){
   check(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), "cEmail", "eEmail");
   check(msg.length > 3, "cMsg", "eMsg");
   const st = $("#cStatus");
+  st.classList.remove("error");
   if(!ok){ st.textContent = ""; return; }
   const btn = $("#cSend");
+  const sendHTML = btn.innerHTML;
   btn.disabled = true;
-  btn.innerHTML = "Opening your email app…";
-  st.textContent = "Composing your message — your email app should open now.";
-  window.location.href = buildMailto(name, email, msg);
-  setTimeout(function(){ btn.disabled = false; btn.innerHTML = 'Send message <b>→</b>'; }, 2500);
+  btn.innerHTML = '<span class="spinner" aria-hidden="true"></span> Sending…';
+  st.textContent = "Sending your message…";
+  fetch("https://formsubmit.co/ajax/" + encodeURIComponent(inboxAddr), {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      opportunity_type: type,
+      start_timeline: time,
+      message: msg,
+      _subject: "New portfolio inquiry from " + name,
+      _template: "table",
+      _captcha: "false",
+      _honey: document.querySelector('input[name="_honey"]').value
+    })
+  }).then(function(r){ return r.json(); }).then(function(){
+    st.textContent = "Message sent — I'll get back to you soon.";
+    $("#cForm").reset();
+    btn.disabled = false;
+    btn.innerHTML = sendHTML;
+  }).catch(function(){
+    st.classList.add("error");
+    st.textContent = "Something went wrong — please try again.";
+    btn.disabled = false;
+    btn.innerHTML = sendHTML;
+  });
 });
 
 /* ============================================================
@@ -1628,6 +1754,34 @@ if(typeof IntersectionObserver !== "undefined"){
 } else {
   $$(".reveal").forEach(function(el){ el.classList.add("in"); });
 }
+
+/* ============================================================
+   MOBILE NAV — hamburger menu with focus management
+   ============================================================ */
+(function(){
+  const btn = $("#menuBtn"), nav = $("#mobileNav");
+  if(!btn || !nav) return;
+  const panel = nav.querySelector(".mobile-nav-panel");
+  let menuFocus = null;
+  function openMenu(){
+    menuFocus = document.activeElement;
+    nav.classList.add("open"); nav.setAttribute("aria-hidden","false");
+    btn.setAttribute("aria-expanded","true"); btn.setAttribute("aria-label","Close menu");
+    document.body.style.overflow = "hidden";
+    const f = panel.querySelector("a"); if(f) f.focus();
+  }
+  function closeMenu(){
+    if(!nav.classList.contains("open")) return;
+    nav.classList.remove("open"); nav.setAttribute("aria-hidden","true");
+    btn.setAttribute("aria-expanded","false"); btn.setAttribute("aria-label","Open menu");
+    document.body.style.overflow = "";
+    if(menuFocus && typeof menuFocus.focus === "function") menuFocus.focus();
+  }
+  btn.addEventListener("click", function(){ nav.classList.contains("open") ? closeMenu() : openMenu(); });
+  nav.addEventListener("click", function(e){ if(e.target.closest("[data-menu-close]")) closeMenu(); });
+  panel.addEventListener("click", function(e){ if(e.target.closest("a")) closeMenu(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeMenu(); });
+})();
 </script>
 </body>
 </html>
