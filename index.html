@@ -257,7 +257,7 @@ footer p{margin:0}
 /* ---------- hero portrait ---------- */
 .hero-portrait{align-self:stretch;min-height:560px;position:relative;overflow:hidden;border:1px solid var(--line);background:linear-gradient(145deg,#14282c,#0c1319)}
 .hero-portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,13,17,.62),transparent 48%);pointer-events:none}
-.hero-portrait img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);opacity:.88;display:block}
+.hero-portrait img{width:100%;height:100%;object-fit:cover;display:block;background:#fff}
 .portrait-grid{position:absolute;z-index:1;inset:0;background-image:linear-gradient(rgba(184,255,72,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(184,255,72,.11) 1px,transparent 1px);background-size:32px 32px;mix-blend-mode:screen;pointer-events:none}
 .portrait-label{position:absolute;z-index:2;top:1rem;left:1rem;right:1rem;display:flex;justify-content:space-between;color:#e7f4ed;font:500 .53rem var(--mono);letter-spacing:.08em;text-transform:uppercase}
 .portrait-mark{position:absolute;z-index:2;left:1.2rem;bottom:1.15rem;display:flex;flex-direction:column;gap:.2rem}
@@ -488,7 +488,7 @@ body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;o
 .tool-link b{font-size:.9rem}
 /* ---------- about enrichment ---------- */
 .about-figure{margin:0 0 1.6rem;border:1px solid var(--line);background:linear-gradient(145deg,#14282c,#0c1319);overflow:hidden}
-.about-figure img{width:100%;height:280px;object-fit:cover;object-position:top;filter:grayscale(1) contrast(1.05);display:block}
+.about-figure img{width:100%;height:280px;object-fit:cover;object-position:top;display:block;background:#fff}
 .about-figure figcaption{display:flex;justify-content:space-between;padding:.8rem 1rem;color:var(--muted);font:500 .55rem var(--mono);letter-spacing:.08em;text-transform:uppercase;border-top:1px solid var(--line)}
 .about-figure figcaption span:last-child{color:var(--acid)}
 .facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
@@ -607,7 +607,7 @@ body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;o
 <section class="hero shell" id="top">
   <div class="orb orb-a" aria-hidden="true"></div><div class="orb orb-b" aria-hidden="true"></div>
   <div class="reveal hero-portrait" style="--d:.05s">
-    <img src="assets/profile.jpg" alt="Portrait of Muhammad Sami Ullah" fetchpriority="high" width="1080" height="1080">
+    <img src="assets/github-avatar.png" alt="Portrait of Muhammad Sami Ullah" fetchpriority="high" width="1080" height="1080">
     <div class="portrait-grid" aria-hidden="true"></div>
     <div class="portrait-label"><span>Profile / 01</span><span>Muhammad Sami Ullah</span></div>
     <div class="portrait-mark"><span>MSU</span><small>Data × Business Analytics</small></div>
@@ -1012,7 +1012,7 @@ body::before{content:"";position:fixed;inset:0;z-index:120;pointer-events:none;o
 <section class="about shell" id="about">
   <div class="reveal">
     <figure class="about-figure">
-      <img src="assets/profile.jpg" alt="Portrait of Muhammad Sami Ullah" loading="lazy" width="1080" height="1080">
+      <img src="assets/github-avatar.png" alt="Portrait of Muhammad Sami Ullah" loading="lazy" width="1080" height="1080">
       <figcaption><span>Islamabad, PK</span><span>UTC+5</span></figcaption>
     </figure>
     <div class="facts-grid">
